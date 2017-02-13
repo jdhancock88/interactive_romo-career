@@ -836,6 +836,28 @@ XIX. ADS
     margin: 2.4rem 0;
     padding: 2.4rem 0; } }
 
+#graphic {
+  width: 100%;
+  min-height: 300px; }
+
+line, path {
+  stroke: #323232;
+  stroke-width: 3; }
+
+path {
+  fill: none;
+  stroke-width: .25; }
+  path.touchdown {
+    stroke: red;
+    stroke-width: .5; }
+
+.axis path, .axis line {
+  fill: none;
+  shape-rendering: crispEdges; }
+
+.axis text {
+  font-family: "Gotham A", "Gotham B", Arial, sans-serif;
+  font-size: 11px; }
 
 .interactive-footer {
   min-height: 97px;

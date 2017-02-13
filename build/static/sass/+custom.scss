@@ -1,11 +1,39 @@
-//  _____           _                    _____ _         _           
-// /  __ \         | |                  /  ___| |       | |          
-// | /  \/_   _ ___| |_ ___  _ __ ___   \ `--.| |_ _   _| | ___  ___ 
+//  _____           _                    _____ _         _
+// /  __ \         | |                  /  ___| |       | |
+// | /  \/_   _ ___| |_ ___  _ __ ___   \ `--.| |_ _   _| | ___  ___
 // | |   | | | / __| __/ _ \| '_ ` _ \   `--. \ __| | | | |/ _ \/ __|
 // | \__/\ |_| \__ \ || (_) | | | | | | /\__/ / |_| |_| | |  __/\__ \
 //  \____/\__,_|___/\__\___/|_| |_| |_| \____/ \__|\__, |_|\___||___/
-//                                                  __/ |            
-//                                                 |___/             
+//                                                  __/ |
+//                                                 |___/
 
 @import 'variables';
 @import 'mixins';
+
+#graphic {
+  width: 100%;
+  min-height: 300px;
+}
+
+line, path {
+  stroke: $black50;
+  stroke-width: 3;
+}
+path {
+  fill: none;
+  stroke-width: .25;
+  &.touchdown {
+    stroke: red;
+    stroke-width: .5;
+  }
+}
+
+.axis path, .axis line {
+  fill: none;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: $sans;
+    font-size: 11px;
+}

@@ -1,6 +1,7 @@
 'use strict';
 var gulp = require('gulp'),
-	jshint = require('gulp-jshint'),
+    babel = require('gulp-babel'),
+	  jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
     sourcemaps = require('gulp-sourcemaps'),
     uglify = require('gulp-uglify'),
@@ -13,6 +14,7 @@ module.exports = function() {
     .pipe(gulp.dest('./public/js'));
   // Copy bundled scripts
   var bundled = gulp.src('./build/static/js/**/+*.js')
+    .pipe(babel({presets: ['es2015']}))
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
     .pipe(sourcemaps.init())
