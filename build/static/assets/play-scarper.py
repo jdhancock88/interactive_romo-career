@@ -77,7 +77,7 @@ def get_passes(year):
                 elif "Tony Romo pass incomplete" in result:
                     pass_result = "incomplete"
                 elif "Tony Romo spiked the ball" in result:
-                    pass_reesult = "incomplete"
+                    pass_result = "incomplete"
 
                 if "touchdown" in result:
                     touchdown = True
