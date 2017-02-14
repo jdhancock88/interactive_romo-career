@@ -23,7 +23,14 @@ $(document).ready(() => {
     x.domain([0, 100]);
     y.domain([height, 0]);
 
-    const xAxis = d3.axisBottom().scale(x);
+    const xAxis = d3.axisBottom().scale(x)
+      .tickValues([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+      .tickFormat(function (d, i) {
+        if (i < 6) {
+          return d;
+        }
+        return d - ((i - 5) * 20);
+      })
 
     const svg = d3.select('#graphic')
       .data(data)
@@ -75,6 +82,14 @@ $(document).ready(() => {
       .attr('class', 'x axis')
       .attr('transform', `translate(${margin.left}, ${height})`)
       .call(xAxis);
+
+    svg.append('text')
+      .attr('class', 'axis-label')
+      .attr('text-anchor', 'middle')
+      .attr('x', (x(50) + margin.left))
+      .attr('y', height + 35)
+      .attr('class', 'axis-label')
+      .text('Cowboys moving left to right');
   }
 
 

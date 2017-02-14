@@ -55,11 +55,17 @@ def get_passes(year):
                 location = location.split(" ")
                 spot = 0
 
-                # target = ""
-                # if "Tony Romo pass complete " in result:
-                #     target = result.split("to ")
-                #     target = target[1].split(" ")
-                #     target = target[0] + " " + target[1]
+                target = ""
+                flag = False
+
+                if "Tony Romo pass complete " in result:
+                    target = result.split("to ")
+                    try:
+                        target = target[1].split(" ")
+                        target = target[0] + " " + target[1]
+                    except:
+                        flag = True
+                        pass
 
                 if location[0] == "DAL":
                     spot = int(location[1])
@@ -80,7 +86,7 @@ def get_passes(year):
                     touchdown = False
                     interception = True
 
-                if "fumbled" in result:
+                if "fumbles" in result:
                     touchdown = False
 
                 if len(pass_result) > 0:
@@ -96,8 +102,9 @@ def get_passes(year):
                         "week": week,
                         "interception": interception,
                         "touchdown": touchdown,
-                        "spot": spot
-                        # "target": target
+                        "spot": spot,
+                        "target": target,
+                        "error": flag
                     }
 
 

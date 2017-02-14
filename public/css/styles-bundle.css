@@ -859,6 +859,10 @@ path {
   font-family: "Gotham A", "Gotham B", Arial, sans-serif;
   font-size: 11px; }
 
+.axis-label {
+  text-transform: uppercase;
+  font-size: 1.2rem; }
+
 .interactive-footer {
   min-height: 97px;
   padding-bottom: 24px;
