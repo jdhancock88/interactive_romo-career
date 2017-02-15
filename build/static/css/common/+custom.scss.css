@@ -1,6 +1,8 @@
 #graphic {
-  width: 100%;
-  min-height: 300px; }
+  width: 95%;
+  min-height: 95vw / 3;
+  max-width: 1400px;
+  margin: 0 auto 4.8rem; }
 
 line, path {
   stroke: #323232;
@@ -8,19 +10,114 @@ line, path {
 
 path {
   fill: none;
-  stroke-width: .25; }
+  stroke-width: .25;
+  stroke: #797979; }
   path.touchdown {
-    stroke: red;
+    stroke: #e34e36;
     stroke-width: .5; }
 
 .axis path, .axis line {
   fill: none;
-  shape-rendering: crispEdges; }
+  shape-rendering: crispEdges;
+  stroke: #323232; }
 
 .axis text {
   font-family: "Gotham A", "Gotham B", Arial, sans-serif;
-  font-size: 11px; }
+  font-size: 1.2rem; }
 
 .axis-label {
   text-transform: uppercase;
   font-size: 1.2rem; }
+
+#att-graphic {
+  width: 95%;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative; }
+
+.season {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  position: relative; }
+  .season .season-label {
+    display: inline;
+    font-weight: bold;
+    font-family: "Gotham A", "Gotham B", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 35px;
+    margin-bottom: 0;
+    float: left;
+    width: 60px;
+    text-align: center;
+    padding-right: 5px; }
+
+.attempt {
+  display: inline-block;
+  float: left;
+  width: 15px;
+  height: 15px;
+  background-color: #d7d7d7;
+  margin: 0 5px 5px 0;
+  text-align: center;
+  font-weight: bold;
+  line-height: 15px;
+  font-size: 11px;
+  border-radius: 2px; }
+  .attempt.interception, .attempt.incomplete {
+    background-color: white !important;
+    border: 1px solid #d7d7d7;
+    cursor: default; }
+  .attempt.touchdown {
+    color: white;
+    border: 2px solid #323232; }
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  background-color: white;
+  display: block;
+  padding: 10px;
+  box-shadow: 0px 0px 5px rgba(121, 121, 121, 0.5);
+  width: 200px;
+  border: 1px solid #797979; }
+  .tooltip.left:after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color: white;
+    right: -5.5px;
+    top: 5px;
+    border-right: 1px solid #797979;
+    border-top: 1px solid #797979; }
+  .tooltip.right:before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color: white;
+    left: -6.5px;
+    top: 5px;
+    border-left: 1px solid #797979;
+    border-bottom: 1px solid #797979; }
+  .tooltip p {
+    font-weight: bold;
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+    margin-bottom: 0.3rem; }
+    .tooltip p:last-of-type {
+      font-weight: normal; }
+    .tooltip p span {
+      font-weight: normal; }
+
+.noshow {
+  display: none; }

@@ -37,6 +37,7 @@
 {%block custom_head%}
 <link rel="canonical" href="{{url}}" />
 <script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
 {%endblock%}
 
 
@@ -138,6 +139,17 @@ googletag.enableServices();
   <div id="graphic">
 
   </div>
+
+
+  <div id="att-graphic">
+    <aside class="tooltip noshow" id="att-tooltip">
+      <p>Week: <span class="tt-week"></span> Season: <span class="tt-season"></span></p>
+      <p>Opponent: <span class="tt-opponent"></span></p>
+      <p>Quarter: <span class="tt-quarter"></span> Time: <span class="tt-time"></span></p>
+      <p class="tt-detail"></p>
+    </aside>
+  </div>
+
 
   <section class="content-well">
 

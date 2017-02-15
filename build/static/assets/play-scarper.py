@@ -2,6 +2,7 @@ import json
 import pprint
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 years = ["2006", "2007", "2008"]
 weeks = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"]
@@ -55,6 +56,9 @@ def get_passes(year):
                 location = location.split(" ")
                 spot = 0
 
+                sort_time = cells[3].text.replace(":", ".")
+                sort_time = float(sort_time)
+
                 target = ""
                 flag = False
 
@@ -93,18 +97,20 @@ def get_passes(year):
 
                     play = {
                         "date": date,
+                        "season": year,
                         "opp": cells[1].text,
-                        "quarter": cells[2].text,
+                        "quarter": int(cells[2].text),
                         "time": cells[3].text,
                         "detail": cells[8].text,
                         "yards": cells[9].text,
                         "result": pass_result,
-                        "week": week,
+                        "week": int(week),
                         "interception": interception,
                         "touchdown": touchdown,
                         "spot": spot,
                         "target": target,
-                        "error": flag
+                        "error": flag,
+                        "sort_time": sort_time
                     }
 
 
