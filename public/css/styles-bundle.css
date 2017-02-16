@@ -917,7 +917,7 @@ path {
   display: block;
   padding: 10px;
   box-shadow: 0px 0px 5px rgba(121, 121, 121, 0.5);
-  width: 200px;
+  width: 150px;
   border: 1px solid #797979; }
   .tooltip.left:after {
     content: "";
@@ -956,6 +956,87 @@ path {
       font-weight: normal; }
     .tooltip p span {
       font-weight: normal; }
+
+.chatter h5 {
+  font-weight: bold; }
+
+.chatter p {
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  margin-bottom: 1.8rem; }
+
+.chatter .chatter-attempt {
+  padding-left: 20px;
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 15px;
+  margin-bottom: 1.2rem; }
+  .chatter .chatter-attempt:before {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    border-radius: 2px;
+    box-sizing: border-box; }
+  .chatter .chatter-attempt.chatter-td:before {
+    border: 2px solid #323232;
+    background-color: #92a9bf; }
+  .chatter .chatter-attempt.chatter-int:before {
+    border: 1px solid #d7d7d7;
+    content: "I";
+    text-align: center;
+    font-weight: bold;
+    font-size: 11px; }
+
+.chatter .chatter-yardage {
+  width: 150px;
+  display: inline-block;
+  height: 18px;
+  background: #e9f4fd;
+  /* Old browsers */
+  background: -moz-linear-gradient(left, #e9f4fd 0%, #0b3f65 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #e9f4fd 0%, #0b3f65 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #e9f4fd 0%, #0b3f65 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9f4fd', endColorstr='#0b3f65',GradientType=1 );
+  /* IE6-9 */
+  position: relative;
+  margin-bottom: 0;
+  font-weight: bold; }
+  .chatter .chatter-yardage span {
+    padding-left: 5px; }
+  .chatter .chatter-yardage:before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 15px;
+    position: relative;
+    content: "Yards";
+    position: absolute;
+    left: 50%;
+    margin-left: -20px;
+    color: white; }
+  .chatter .chatter-yardage:after {
+    content: "";
+    display: block;
+    width: 11px;
+    height: 15px;
+    position: absolute;
+    content: "100";
+    right: 20px;
+    text-align: right;
+    font-weight: bold;
+    color: white;
+    top: 0; }
 
 .noshow {
   display: none; }

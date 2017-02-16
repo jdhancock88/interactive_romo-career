@@ -6,6 +6,33 @@ $(document).ready(() => {
 
   const sortedData = [];
 
+
+  function displayTooltip(event, data, id) {
+    const tooltip = d3.select(id);
+    const ttWidth = $(id).outerWidth();
+    tooltip.select('.tt-season').text(data.season);
+    tooltip.select('.tt-opponent').text(data.opp);
+    tooltip.select('.tt-week').text(data.week);
+    tooltip.select('.tt-quarter').text(data.quarter);
+    tooltip.select('.tt-time').text(data.time);
+    tooltip.select('.tt-detail').text(data.detail);
+
+    const w = $(window).width();
+    let xPos = 0;
+    if (event.clientX > w / 2.1) {
+      xPos = event.clientX - (ttWidth + 15);
+      tooltip.attr('class', 'tooltip left');
+    } else {
+      xPos = event.clientX + 20;
+      tooltip.attr('class', 'tooltip right');
+    }
+
+    // const xPos = event.clientX > (w / 2) ? event.clientX - 160 : event.clientX + 20;
+    const yPos = event.clientY - 10;
+
+    tooltip.attr('style', `left: ${xPos}px; top: ${yPos}px`);
+  }
+
   /* ///////////////////////////////////////////////////////////////////////////
   // DRAWING THE ARC GRAPHIC
   /////////////////////////////////////////////////////////////////////////// */
@@ -113,47 +140,17 @@ $(document).ready(() => {
       .text('Cowboys moving left to right');
   }
 
-
-  function displayTooltip(event, data, id) {
-    const tooltip = d3.select(id);
-    const ttWidth = $(id).outerWidth();
-    tooltip.select('.tt-season').text(data.season);
-    tooltip.select('.tt-opponent').text(data.opp);
-    tooltip.select('.tt-week').text(data.week);
-    tooltip.select('.tt-quarter').text(data.quarter);
-    tooltip.select('.tt-time').text(data.time);
-    tooltip.select('.tt-detail').text(data.detail);
-
-    const w = $(window).width();
-    let xPos = 0;
-    if (event.clientX > w / 2.1) {
-      xPos = event.clientX - (ttWidth + 15);
-      tooltip.attr('class', 'tooltip left');
-    } else {
-      xPos = event.clientX + 20;
-      tooltip.attr('class', 'tooltip right');
-    }
-
-    // const xPos = event.clientX > (w / 2) ? event.clientX - 160 : event.clientX + 20;
-    const yPos = event.clientY - 10;
-
-    tooltip.attr('style', `left: ${xPos}px; top: ${yPos}px`);
-  }
-
   /* ///////////////////////////////////////////////////////////////////////////
   // DRAWING THE ATTEMPTS GRAPHIC
   /////////////////////////////////////////////////////////////////////////// */
 
   function drawAttempts(data) {
-    console.log(data);
-
-    const color = d3.scaleLinear().domain([0, 100])
+    const color = d3.scaleLinear().domain([-10, 100])
       .interpolate(d3.interpolateHcl)
       .range([d3.rgb('#e9f4fd'), d3.rgb('#0b3f65')]);
 
     const attContainer = d3.select('#att-graphic')
       .data(data);
-
 
     const seasons = attContainer.selectAll('div')
       .data(data)
