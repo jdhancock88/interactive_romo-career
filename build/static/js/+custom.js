@@ -7,9 +7,17 @@ $(document).ready(() => {
   const sortedData = [];
 
 
+  /*
+  ///////////////////////////////////////////////////////////////////////////
+  DISPLAYING THE TOOLTIP
+  ///////////////////////////////////////////////////////////////////////////
+  */
+
   function displayTooltip(event, data, id) {
     const tooltip = d3.select(id);
     const ttWidth = $(id).outerWidth();
+
+    // populating the tooltip info with data from the point hovered over
     tooltip.select('.tt-season').text(data.season);
     tooltip.select('.tt-opponent').text(data.opp);
     tooltip.select('.tt-week').text(data.week);
@@ -17,18 +25,19 @@ $(document).ready(() => {
     tooltip.select('.tt-time').text(data.time);
     tooltip.select('.tt-detail').text(data.detail);
 
+    // use the clientX position in relation to the window width to position the
+    // tooltip to the left or right of the point hovered over.
     const w = $(window).width();
     let xPos = 0;
     if (event.clientX > w / 2.1) {
-      xPos = event.clientX - (ttWidth + 15);
-      tooltip.attr('class', 'tooltip left');
+      xPos = event.clientX - (ttWidth - 10);
+      tooltip.attr('class', 'tooltip');
     } else {
-      xPos = event.clientX + 20;
-      tooltip.attr('class', 'tooltip right');
+      xPos = event.clientX - 10;
+      tooltip.attr('class', 'tooltip');
     }
 
-    // const xPos = event.clientX > (w / 2) ? event.clientX - 160 : event.clientX + 20;
-    const yPos = event.clientY - 10;
+    const yPos = event.clientY + 15;
 
     tooltip.attr('style', `left: ${xPos}px; top: ${yPos}px`);
   }
@@ -36,6 +45,7 @@ $(document).ready(() => {
   /* ///////////////////////////////////////////////////////////////////////////
   // DRAWING THE ARC GRAPHIC
   /////////////////////////////////////////////////////////////////////////// */
+
   function drawPassGraphic(data) {
     console.log(data);
 
@@ -140,11 +150,14 @@ $(document).ready(() => {
       .text('Cowboys moving left to right');
   }
 
-  /* ///////////////////////////////////////////////////////////////////////////
+  /*
+  ///////////////////////////////////////////////////////////////////////////
   // DRAWING THE ATTEMPTS GRAPHIC
-  /////////////////////////////////////////////////////////////////////////// */
+  ///////////////////////////////////////////////////////////////////////////
+  */
 
   function drawAttempts(data) {
+    // creating a color scale to measure yardage against
     const color = d3.scaleLinear().domain([-10, 100])
       .interpolate(d3.interpolateHcl)
       .range([d3.rgb('#e9f4fd'), d3.rgb('#0b3f65')]);
@@ -152,12 +165,14 @@ $(document).ready(() => {
     const attContainer = d3.select('#att-graphic')
       .data(data);
 
+    // append a .season div for each season in the data
     const seasons = attContainer.selectAll('div')
       .data(data)
       .enter()
       .append('div')
       .attr('class', d => `season season-${d.season_year} clearfix`);
 
+    // append a season year label to each .season div
     seasons.append('span')
       .attr('class', 'season-label')
       .text((d) => {
@@ -165,6 +180,7 @@ $(document).ready(() => {
         return (d.season_year);
       });
 
+    // append a span for each attempt in a season
     seasons.selectAll('attempt')
       .data(d => d.plays)
       .enter()
@@ -186,8 +202,79 @@ $(document).ready(() => {
         } return '';
       })
       .on('mousemove', d => displayTooltip(event, d, '#att-tooltip'))
-      .on('mouseout', () => d3.select('#att-tooltip').attr('class', 'tooltip noshow'));
+      .on('mouseout', () => d3.select('#att-tooltip').attr('class', 'tooltip no-show'));
   }
+
+  /*
+  ///////////////////////////////////////////////////////////////////////////
+  // CONTROLLING WHICH SEASONS GET DISPLAYED IN THE COMPLETION CHART
+  ///////////////////////////////////////////////////////////////////////////
+  */
+
+  // an array that will be the currently selected seasons to view
+  let active = [];
+
+  // controlling the active/inactive styles of seasons selected
+  $('.chatter li').click(function () {
+    if ($(this).hasClass('active') === true) {
+      $(this).removeClass('active');
+    } else {
+      $(this).addClass('active');
+    }
+
+    // clearing the active array, then populating it with years of seasons clicked
+    active = [];
+    for (let i = 0; i < $('.active').length; i += 1) {
+      active.push($('.active').eq(i).text());
+    }
+
+    // hide all the passing arcs, then dispaly the ones that correspond to the
+    // selected seasons in the active array
+    $('.pass').addClass('no-show');
+
+    for (let i = 0; i < active.length; i += 1) {
+      $(`.yr-${active[i]}`).removeClass('no-show');
+    }
+
+    // if view-all is selected, display all arcs
+    if ($(this).attr('id') === 'view-all') {
+      $(this).siblings().removeClass('active');
+      $(this).addClass('active');
+      $('.pass').removeClass('no-show');
+    } else {
+      $('#view-all').removeClass('active');
+    }
+  });
+
+  /*
+  ///////////////////////////////////////////////////////////////////////////
+  // DRAWING THE RECEIVER CHART
+  ///////////////////////////////////////////////////////////////////////////
+  */
+
+  function drawReceivers(data, key) {
+    $('.rec-stat').text(key);
+    const receivers = _.orderBy(data, [key], ['desc']);
+    for (let i = 0; i < 10; i += 1) {
+      const row = `<tr><td>${receivers[i].receiver}</td><td>${receivers[i][key]}</td></tr>`;
+      $('#rec-graphic tbody').append(row);
+    }
+    console.table(receivers);
+  }
+
+  /*
+  ///////////////////////////////////////////////////////////////////////////
+  // CLOSING THE TOOLTIP
+  ///////////////////////////////////////////////////////////////////////////
+  */
+
+  $('.tooltip button').click(() => $('.tooltip').addClass('no-show'));
+
+  /*
+  ///////////////////////////////////////////////////////////////////////////
+  // GETTING OUR DATA
+  ///////////////////////////////////////////////////////////////////////////
+  */
 
   $.getJSON('../js/data.json', (data) => {
     // sorts data by week, quarter and time
@@ -202,33 +289,7 @@ $(document).ready(() => {
     drawAttempts(sortedData);
   });
 
-  let active = [];
-
-  $('.chatter li').click(function () {
-    if ($(this).hasClass('active') === true) {
-      $(this).removeClass('active');
-    } else {
-      $(this).addClass('active');
-    }
-
-
-    active = [];
-    for (let i = 0; i < $('.active').length; i += 1) {
-      active.push($('.active').eq(i).text());
-    }
-
-    $('.pass').addClass('no-show');
-
-    for (let i = 0; i < active.length; i += 1) {
-      $(`.yr-${active[i]}`).removeClass('no-show');
-    }
-
-    if ($(this).attr('id') === 'view-all') {
-      $(this).siblings().removeClass('active');
-      $(this).addClass('active');
-      $('.pass').removeClass('no-show');
-    } else {
-      $('#view-all').removeClass('active');
-    }
+  $.getJSON('../js/rec-data.json', (data) => {
+    drawReceivers(data, 'catches');
   });
 });

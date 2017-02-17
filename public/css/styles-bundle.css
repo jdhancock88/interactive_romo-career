@@ -867,11 +867,30 @@ path {
   text-transform: uppercase;
   font-size: 1.2rem; }
 
-#att-graphic {
+#att-graphic, #rec-graphic {
   width: 95%;
   max-width: 1000px;
   margin: 0 auto;
   position: relative; }
+
+#rec-graphic table {
+  width: 20%; }
+
+#rec-graphic tr {
+  font-size: 1.4rem;
+  line-height: 3rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid #d7d7d7; }
+
+#rec-graphic th {
+  font-weight: bold;
+  text-align: left; }
+  #rec-graphic th:last-of-type {
+    text-align: right;
+    text-transform: capitalize; }
+
+#rec-graphic td:last-of-type {
+  text-align: right; }
 
 .season {
   display: block;
@@ -908,7 +927,7 @@ path {
     cursor: default; }
   .attempt.touchdown {
     color: white;
-    border: 2px solid #323232; }
+    border: 2px solid black; }
 
 .tooltip {
   position: fixed;
@@ -919,34 +938,6 @@ path {
   box-shadow: 0px 0px 5px rgba(121, 121, 121, 0.5);
   width: 150px;
   border: 1px solid #797979; }
-  .tooltip.left:after {
-    content: "";
-    display: block;
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    transform: rotate(45deg);
-    background-color: white;
-    right: -5.5px;
-    top: 5px;
-    border-right: 1px solid #797979;
-    border-top: 1px solid #797979; }
-  .tooltip.right:before {
-    content: "";
-    display: block;
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    transform: rotate(45deg);
-    background-color: white;
-    left: -6.5px;
-    top: 5px;
-    border-left: 1px solid #797979;
-    border-bottom: 1px solid #797979; }
   .tooltip p {
     font-weight: bold;
     font-size: 1.1rem;
@@ -956,6 +947,15 @@ path {
       font-weight: normal; }
     .tooltip p span {
       font-weight: normal; }
+  .tooltip button {
+    border: none;
+    background-color: #212121;
+    color: white;
+    border-radius: 2px;
+    font-family: "Gotham A", "Gotham B", Arial, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+    margin-top: .6rem; }
 
 .chatter h5 {
   font-weight: bold; }
@@ -1001,7 +1001,7 @@ path {
     border-radius: 2px;
     box-sizing: border-box; }
   .chatter .chatter-attempt.chatter-td:before {
-    border: 2px solid #323232;
+    border: 2px solid black;
     background-color: #92a9bf; }
   .chatter .chatter-attempt.chatter-int:before {
     border: 1px solid #d7d7d7;
@@ -1053,7 +1053,7 @@ path {
     color: white;
     top: 0; }
 
-.noshow, .no-show {
+.no-show {
   display: none; }
 
 .interactive-footer {
