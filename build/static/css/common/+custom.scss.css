@@ -127,6 +127,21 @@ path {
   line-height: 1.8rem;
   margin-bottom: 1.8rem; }
 
+.chatter li {
+  min-width: 50px;
+  padding: 0 5px;
+  display: inline-block;
+  font-size: 1.3rem;
+  line-height: 2.4rem;
+  margin-bottom: 0;
+  background-color: #ebebeb;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold; }
+  .chatter li.active {
+    background-color: #0185d3;
+    color: white; }
+
 .chatter .chatter-attempt {
   padding-left: 20px;
   position: relative;
@@ -200,5 +215,5 @@ path {
     color: white;
     top: 0; }
 
-.noshow {
+.noshow, .no-show {
   display: none; }

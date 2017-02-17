@@ -110,9 +110,9 @@ $(document).ready(() => {
       .append('path')
       .attr('class', (d) => {
         if (d.touchdown === true) {
-          return 'pass touchdown';
+          return `pass touchdown yr-${d.season}`;
         }
-        return 'pass';
+        return `pass yr-${d.season}`;
       })
       .attr('d', d => line(d));
 
@@ -200,5 +200,35 @@ $(document).ready(() => {
     // passes off sorted data to arc drawing function
     drawPassGraphic(sortedData);
     drawAttempts(sortedData);
+  });
+
+  let active = [];
+
+  $('.chatter li').click(function () {
+    if ($(this).hasClass('active') === true) {
+      $(this).removeClass('active');
+    } else {
+      $(this).addClass('active');
+    }
+
+
+    active = [];
+    for (let i = 0; i < $('.active').length; i += 1) {
+      active.push($('.active').eq(i).text());
+    }
+
+    $('.pass').addClass('no-show');
+
+    for (let i = 0; i < active.length; i += 1) {
+      $(`.yr-${active[i]}`).removeClass('no-show');
+    }
+
+    if ($(this).attr('id') === 'view-all') {
+      $(this).siblings().removeClass('active');
+      $(this).addClass('active');
+      $('.pass').removeClass('no-show');
+    } else {
+      $('#view-all').removeClass('active');
+    }
   });
 });

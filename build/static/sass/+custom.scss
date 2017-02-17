@@ -137,6 +137,20 @@ path {
   p {
     @include type(1.4rem, 1.8rem, 1.8rem);
   }
+  li {
+    min-width: 50px;
+    padding: 0 5px;
+    display: inline-block;
+    @include type(1.3rem, 2.4rem, 0);
+    background-color: $black235;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    &.active {
+      background-color: $dmnblue;
+      color: white;
+    }
+  }
   .chatter-attempt {
     padding-left: 20px;
     position: relative;
@@ -199,6 +213,6 @@ path {
   }
 }
 
-.noshow {
+.noshow, .no-show {
   display: none;
 }
