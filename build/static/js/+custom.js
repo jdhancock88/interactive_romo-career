@@ -99,9 +99,15 @@ $(document).ready(() => {
       const x1 = x(d.spot).toString();
       const x2 = x(d.spot + (+d.yards)).toString();
       const y1 = y(height).toString();
-      const offset = y(height - ((+d.yards / 1.25) * arcMod)).toString();
+      let offset = y(height - ((+d.yards / 1.25) * arcMod)).toString();
       const offsetX1 = x(d.spot + (+d.yards / 4)).toString();
       const offsetX2 = x((d.spot + (+d.yards)) - (+d.yards / 4)).toString();
+
+      if (+d.yards === 0 && d.result === 'complete') {
+        console.log('test');
+        console.log(d.season, d.opp, d.spot);
+        offset = y(height - 25);
+      }
 
       return (`M ${x1},${y1} C ${offsetX1}, ${offset} ${offsetX2}, ${offset} ${x2}, ${y1}`);
     };
@@ -120,9 +126,9 @@ $(document).ready(() => {
       .append('path')
       .attr('class', (d) => {
         if (d.touchdown === true) {
-          return `pass touchdown yr-${d.season}`;
+          return `pass touchdown yr-${d.season} ${d.opp}`;
         }
-        return `pass yr-${d.season}`;
+        return `pass yr-${d.season} ${d.opp}`;
       })
       .attr('d', d => line(d));
 
@@ -214,37 +220,34 @@ $(document).ready(() => {
   // an array that will be the currently selected seasons to view
   let active = [];
 
-  // controlling the active/inactive styles of seasons selected
-  $('.chatter li').click(function () {
-    if ($(this).hasClass('active') === true) {
-      $(this).removeClass('active');
-    } else {
-      $(this).addClass('active');
-    }
+  let selSeason = 'all';
+  let selOpp = 'all';
 
-    // clearing the active array, then populating it with years of seasons clicked
-    active = [];
-    for (let i = 0; i < $('.active').length; i += 1) {
-      active.push($('.active').eq(i).text());
-    }
-
-    // hide all the passing arcs, then dispaly the ones that correspond to the
-    // selected seasons in the active array
+  function viewComps() {
+    console.log(selSeason, selOpp);
     $('.pass').addClass('no-show');
 
-    for (let i = 0; i < active.length; i += 1) {
-      $(`.yr-${active[i]}`).removeClass('no-show');
-    }
-
-    // if view-all is selected, display all arcs
-    if ($(this).attr('id') === 'view-all') {
-      $(this).siblings().removeClass('active');
-      $(this).addClass('active');
-      $('.pass').removeClass('no-show');
+    if (selSeason !== 'all' && selOpp !== 'all') {
+      $(`.yr-${selSeason}.${selOpp}`).removeClass('no-show');
+    } else if (selSeason === 'all' && selOpp !== 'all') {
+      $(`.${selOpp}`).removeClass('no-show');
+    } else if (selOpp === 'all' && selSeason !== 'all') {
+      $(`.yr-${selSeason}`).removeClass('no-show');
     } else {
-      $('#view-all').removeClass('active');
+      $('.pass').removeClass('no-show');
     }
+  }
+
+  $('#comp-season').change(function () {
+    selSeason = $('#comp-season option:selected').attr('value');
+    viewComps();
   });
+
+  $('#comp-opp').change(function () {
+    selOpp = $('#comp-opp option:selected').attr('value');
+    viewComps();
+  });
+
 
   /*
   ///////////////////////////////////////////////////////////////////////////

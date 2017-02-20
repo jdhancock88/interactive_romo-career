@@ -138,12 +138,34 @@ googletag.enableServices();
 
   <div id="graphic">
     <section class="chatter">
-      <ul>
-        <li class="selector active" id="view-all">View All</li>
-        <li class="selector">2006</li>
-        <li class="selector">2007</li>
-        <li class="selector">2008</li>
-      </ul>
+      <h5>Explore every completion of Tony Romo’s career</h5>
+      <p>The chart below shows every completion by Tony Romo as a Dallas Cowboy. View Romo’s completions by season and opponent. The longer and higher the arc, the longer the completion. Vertical lines indicate a completion for no gain. Arcs below the baseline indicate a loss of yardage. Red lines indicate a touchdown pass.</p>
+
+      <div class="controls clearfix">
+
+        <div class="control-group">
+          <span class="control-label">Season:</span>
+          <select id="comp-season">
+            <option value="all">All seasons</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <span class="control-label">Opponent:</span>
+          <select id="comp-opp">
+            <option value="all">All opponents</option>
+            <option value="Eagles">Eagles</option>
+            <option value="Giants">Giants</option>
+            <option value="Texans">Texans</option>
+            <option value="Redskins">Redskins</option>
+          </select>
+        </div>
+
+      </div>
+
     </section>
 
   </div>
