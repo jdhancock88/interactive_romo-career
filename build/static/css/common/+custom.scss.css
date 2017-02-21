@@ -232,5 +232,8 @@ path {
     color: white;
     top: 0; }
 
+#receiver-arcs {
+  min-height: 300px; }
+
 .no-show {
   display: none; }

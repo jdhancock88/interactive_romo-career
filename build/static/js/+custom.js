@@ -5,7 +5,12 @@ $(document).ready(() => {
   // custom scripting goes here
 
   const sortedData = [];
+  const romoComps = 2943;
+  const romoTDs = 256;
+  const romoYds = 35499;
 
+
+  let desiredRec = [];
 
   /*
   ///////////////////////////////////////////////////////////////////////////
@@ -46,9 +51,7 @@ $(document).ready(() => {
   // DRAWING THE ARC GRAPHIC
   /////////////////////////////////////////////////////////////////////////// */
 
-  function drawPassGraphic(data) {
-    console.log(data);
-
+  function drawPassGraphic(data, target) {
     const margin = {
       top: 0,
       right: 50,
@@ -57,7 +60,7 @@ $(document).ready(() => {
     };
 
     // getting the width and potential height
-    const width = $('#graphic').width();
+    const width = $(target).width();
     const potentialHeight = width / 3;
 
     // using the lesser of potentialHeight and 400 as the height of the graphic
@@ -85,7 +88,7 @@ $(document).ready(() => {
       });
 
     // creating our svg canvas
-    const svg = d3.select('#graphic')
+    const svg = d3.select(target)
       .data(data)
       .append('svg')
         .attr('width', width)
@@ -104,8 +107,6 @@ $(document).ready(() => {
       const offsetX2 = x((d.spot + (+d.yards)) - (+d.yards / 4)).toString();
 
       if (+d.yards === 0 && d.result === 'complete') {
-        console.log('test');
-        console.log(d.season, d.opp, d.spot);
         offset = y(height - 25);
       }
 
@@ -182,7 +183,6 @@ $(document).ready(() => {
     seasons.append('span')
       .attr('class', 'season-label')
       .text((d) => {
-        console.log(d);
         return (d.season_year);
       });
 
@@ -217,14 +217,10 @@ $(document).ready(() => {
   ///////////////////////////////////////////////////////////////////////////
   */
 
-  // an array that will be the currently selected seasons to view
-  let active = [];
-
   let selSeason = 'all';
   let selOpp = 'all';
 
   function viewComps() {
-    console.log(selSeason, selOpp);
     $('.pass').addClass('no-show');
 
     if (selSeason !== 'all' && selOpp !== 'all') {
@@ -248,21 +244,61 @@ $(document).ready(() => {
     viewComps();
   });
 
-
   /*
   ///////////////////////////////////////////////////////////////////////////
-  // DRAWING THE RECEIVER CHART
+  // FILTERING THE DATA DOWN TO A SELECTED RECEIVER
   ///////////////////////////////////////////////////////////////////////////
   */
 
-  function drawReceivers(data, key) {
-    $('.rec-stat').text(key);
-    const receivers = _.orderBy(data, [key], ['desc']);
-    for (let i = 0; i < 10; i += 1) {
-      const row = `<tr><td>${receivers[i].receiver}</td><td>${receivers[i][key]}</td></tr>`;
-      $('#rec-graphic tbody').append(row);
+  function filterReceivers(selected) {
+    // clear the desiredRec array and the div that holds the receiver arc chart
+    desiredRec = [];
+    $('#receiver-arcs').html('');
+
+    // iterate over the original data, creating a new season object and pushing
+    // it to the desiredRec array
+    for (let i = 0; i < sortedData.length; i += 1) {
+      const season = {
+        season_year: sortedData[i].season_year,
+        plays: [],
+      };
+      $.each(sortedData[i].plays, function(k, v) {
+        if (v.target === selected) {
+          season.plays.push(v);
+        }
+      });
+
+      desiredRec.push(season);
     }
-    console.table(receivers);
+
+    $('#receiver-name').text(selected);
+
+    // hand off the filtered data to the arc drawing function
+    drawPassGraphic(desiredRec, '#receiver-arcs');
+  }
+
+  /*
+  ///////////////////////////////////////////////////////////////////////////
+  // DRAWING THE RECEIVER DROPDOWN
+  ///////////////////////////////////////////////////////////////////////////
+  */
+
+  function drawReceivers(data) {
+
+    // order the receivers by catches
+    const receivers = _.orderBy(data, ['catches'], ['desc']);
+
+    // for each receiver, append an option element to the receiver dropdown
+    $.each(receivers, (k, v) => {
+      $('#catchers').append(`<option value='${v.receiver}'>${v.receiver}</option>`);
+    });
+
+    // when the dropdown is changed, grab the value of the selected option and
+    // hand it off to the filterReceivers function
+    $('#catchers').change(function() {
+      const selectedRec = $(this).val();
+      filterReceivers(selectedRec);
+    });
   }
 
   /*
@@ -288,11 +324,14 @@ $(document).ready(() => {
     });
 
     // passes off sorted data to arc drawing function
-    drawPassGraphic(sortedData);
+    drawPassGraphic(sortedData, '#graphic');
     drawAttempts(sortedData);
+
+    // do an inital filter for Jason Witten to draw the first receiver chart
+    filterReceivers('Jason Witten');
   });
 
   $.getJSON('../js/rec-data.json', (data) => {
-    drawReceivers(data, 'catches');
+    drawReceivers(data);
   });
 });

@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-years = ["2006", "2007", "2008"]
+years = ["2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
 weeks = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"]
 
 # weeks = ["10"]
@@ -93,6 +93,14 @@ def get_passes(year):
                 if "fumbles" in result:
                     touchdown = False
 
+                try:
+                    yards = cells[9].text
+                except:
+                    yards = "error"
+                    pass
+
+                pprint.pprint(row)
+
                 if len(pass_result) > 0:
 
                     play = {
@@ -102,7 +110,7 @@ def get_passes(year):
                         "quarter": int(cells[2].text),
                         "time": cells[3].text,
                         "detail": cells[8].text,
-                        "yards": cells[9].text,
+                        "yards": yards,
                         "result": pass_result,
                         "week": int(week),
                         "interception": interception,
