@@ -1,16 +1,36 @@
-/* global $:true document:true d3:true mapboxgl: true window: true _:true event: true */
+/*
+global $:true document:true d3:true mapboxgl: true window: true _:true event: true Modernizr: true
+*/
 
 
 $(document).ready(() => {
   // custom scripting goes here
+
+  if (Modernizr.touchevents) {
+    $('body').addClass('touch');
+  }
 
   const sortedData = [];
   const romoComps = 2943;
   const romoTDs = 256;
   const romoYds = 35499;
 
-
   let desiredRec = [];
+  let receivers;
+
+  const romoCareer = [
+    { season: '2006', comps: 237, atts: 366, yds: '3,104', tds: 20 },
+    { season: '2007', comps: 353, atts: 556, yds: '4,412', tds: 37 },
+    { season: '2008', comps: 276, atts: 450, yds: '3,448', tds: 26 },
+    { season: '2009', comps: 392, atts: 620, yds: '4,925', tds: 28 },
+    { season: '2010', comps: 148, atts: 213, yds: '1,605', tds: 11 },
+    { season: '2011', comps: 346, atts: 522, yds: '4,184', tds: 31 },
+    { season: '2012', comps: 425, atts: 648, yds: '4,903', tds: 28 },
+    { season: '2013', comps: 342, atts: 535, yds: '3,828', tds: 31 },
+    { season: '2014', comps: 338, atts: 485, yds: '4,189', tds: 38 },
+    { season: '2015', comps: 83, atts: 121, yds: '884', tds: 5 },
+    { season: '2016', comps: 3, atts: 4, yds: '29', tds: 1 },
+  ];
 
   /*
   ///////////////////////////////////////////////////////////////////////////
@@ -52,22 +72,30 @@ $(document).ready(() => {
   /////////////////////////////////////////////////////////////////////////// */
 
   function drawPassGraphic(data, target) {
-    const margin = {
+    let margin = {
       top: 0,
-      right: 50,
+      right: 10,
       bottom: 40,
-      left: 50,
+      left: 10,
     };
 
     // getting the width and potential height
     const width = $(target).width();
-    const potentialHeight = width / 3;
+
+    const potentialHeight = width / 2;
 
     // using the lesser of potentialHeight and 400 as the height of the graphic
-    const height = potentialHeight > 400 ? 400 : potentialHeight;
+    let height = potentialHeight > 400 ? 400 : potentialHeight;
 
     // the arc modifier is a factor of the height of the graphic
-    const arcMod = (height / 100) * 1.5;
+    let arcMod = (height / 100) * 1.5;
+
+    if (target !== '#graphic') {
+      height = 198;
+      arcMod = (height / 100) * 1.7;
+      margin.bottom = 35;
+    }
+
 
     // setting our x and y scales
     const x = d3.scaleLinear().range([0, width - margin.left - margin.right]);
@@ -167,7 +195,7 @@ $(document).ready(() => {
     // creating a color scale to measure yardage against
     const color = d3.scaleLinear().domain([-10, 100])
       .interpolate(d3.interpolateHcl)
-      .range([d3.rgb('#e9f4fd'), d3.rgb('#0b3f65')]);
+      .range([d3.rgb('#deebf7'), d3.rgb('#08306b')]);
 
     const attContainer = d3.select('#att-graphic')
       .data(data);
@@ -182,8 +210,8 @@ $(document).ready(() => {
     // append a season year label to each .season div
     seasons.append('span')
       .attr('class', 'season-label')
-      .text((d) => {
-        return (d.season_year);
+      .html((d, i) => {
+        return (`<strong>${d.season_year}:</strong> ${romoCareer[i].comps}-${romoCareer[i].atts}, ${romoCareer[i].yds} yards, ${romoCareer[i].tds} TDs`);
       });
 
     // append a span for each attempt in a season
@@ -202,13 +230,35 @@ $(document).ready(() => {
         }
         return 'attempt';
       })
-      .text((d) => {
-        if (d.interception) {
-          return 'I';
-        } return '';
-      })
       .on('mousemove', d => displayTooltip(event, d, '#att-tooltip'))
       .on('mouseout', () => d3.select('#att-tooltip').attr('class', 'tooltip no-show'));
+
+    // testing!!!!!!!
+
+    let streak = 0;
+    let high = 0;
+    $.each($('.attempt'), function () {
+      if ($(this).hasClass('interception') === false && $(this).hasClass('incomplete') === false) {
+        streak += 1;
+      } else {
+        if (streak >= high) {
+          high = streak;
+          console.log(high, $(this).parent().attr('class'));
+        }
+        streak = 0;
+      }
+    });
+
+    $.each($('.season'), function () {
+      let comps = 0;
+      $.each($(this).children('.attempt'), function () {
+        if ($(this).hasClass('interception') === false && $(this).hasClass('incomplete') === false) {
+          comps += 1;
+        }
+      });
+      console.log(comps, $(this).children('.attempt').length);
+    });
+
   }
 
   /*
@@ -221,16 +271,16 @@ $(document).ready(() => {
   let selOpp = 'all';
 
   function viewComps() {
-    $('.pass').addClass('no-show');
+    $('#graphic .pass').addClass('no-show');
 
     if (selSeason !== 'all' && selOpp !== 'all') {
-      $(`.yr-${selSeason}.${selOpp}`).removeClass('no-show');
+      $(`#graphic .yr-${selSeason}.${selOpp}`).removeClass('no-show');
     } else if (selSeason === 'all' && selOpp !== 'all') {
-      $(`.${selOpp}`).removeClass('no-show');
+      $(`#graphic .${selOpp}`).removeClass('no-show');
     } else if (selOpp === 'all' && selSeason !== 'all') {
-      $(`.yr-${selSeason}`).removeClass('no-show');
+      $(`#graphic .yr-${selSeason}`).removeClass('no-show');
     } else {
-      $('.pass').removeClass('no-show');
+      $('#graphic .pass').removeClass('no-show');
     }
   }
 
@@ -243,6 +293,49 @@ $(document).ready(() => {
     selOpp = $('#comp-opp option:selected').attr('value');
     viewComps();
   });
+
+
+  function drawPassBars(receiver) {
+    console.log(receiver);
+    const target = _.find(receivers, ['receiver', receiver]);
+    console.log(target);
+
+    let recPer = parseFloat(((target.catches / romoComps) * 100).toFixed(1));
+    let ydsPer = parseFloat(((target.yards / romoYds) * 100).toFixed(1));
+    let tdsPer = parseFloat(((target.touchdowns / romoTDs) * 100).toFixed(1));
+
+    recPer = recPer > 0 ? recPer : 0;
+    ydsPer = ydsPer > 0 ? ydsPer : 0;
+    tdsPer = tdsPer > 0 ? tdsPer : 0;
+
+    console.log(recPer, ydsPer, tdsPer);
+    $('#player-recs').css('width', `${recPer}%`);
+    $('#player-yds').css('width', `${ydsPer}%`);
+    $('#player-tds').css('width', `${tdsPer}%`);
+
+    $('#rec-per').text(`${recPer}%`).css('left', `${recPer}%`);
+    $('#yds-per').text(`${ydsPer}%`).css('left', `${ydsPer}%`);
+    $('#tds-per').text(`${tdsPer}%`).css('left', `${tdsPer}%`);
+
+    let ydsString = target.yards.toFixed(0);
+
+    if (ydsString.length >= 4) {
+      const yds1 = ydsString.slice(0, (ydsString.length - 3));
+      const yds2 = ydsString.slice(-3);
+      ydsString = `${yds1},${yds2}`;
+    }
+
+    $('#rec-data').html(target.catches);
+    $('#yds-data').html(ydsString);
+    $('#tds-data').html(target.touchdowns);
+
+
+    let recImage = target.receiver.split(' ').join('');
+    recImage = `_${recImage}.jpg`;
+
+    $('#receiver-head-block img').attr('src', `images/${recImage}`).attr('alt', target.receiver);
+    $('#receiver-pos').text(`${target.pos}, ${target.years}`);
+  }
 
   /*
   ///////////////////////////////////////////////////////////////////////////
@@ -275,31 +368,22 @@ $(document).ready(() => {
 
     // hand off the filtered data to the arc drawing function
     drawPassGraphic(desiredRec, '#receiver-arcs');
+    drawPassBars(selected);
   }
+
 
   /*
   ///////////////////////////////////////////////////////////////////////////
-  // DRAWING THE RECEIVER DROPDOWN
+  // CHANGING THE RECEIVER CHART
   ///////////////////////////////////////////////////////////////////////////
   */
 
-  function drawReceivers(data) {
-
-    // order the receivers by catches
-    const receivers = _.orderBy(data, ['catches'], ['desc']);
-
-    // for each receiver, append an option element to the receiver dropdown
-    $.each(receivers, (k, v) => {
-      $('#catchers').append(`<option value='${v.receiver}'>${v.receiver}</option>`);
-    });
-
-    // when the dropdown is changed, grab the value of the selected option and
-    // hand it off to the filterReceivers function
-    $('#catchers').change(function() {
-      const selectedRec = $(this).val();
-      filterReceivers(selectedRec);
-    });
-  }
+  // when the dropdown is changed, grab the value of the selected option and
+  // hand it off to the filterReceivers function
+  $('#catchers').change(function () {
+    const selectedRec = $(this).val();
+    filterReceivers(selectedRec);
+  });
 
   /*
   ///////////////////////////////////////////////////////////////////////////
@@ -315,7 +399,7 @@ $(document).ready(() => {
   ///////////////////////////////////////////////////////////////////////////
   */
 
-  $.getJSON('../js/data.json', (data) => {
+  $.getJSON('../js/data2.json', (data) => {
     // sorts data by week, quarter and time
     data.forEach((value) => {
       const tempYear = value;
@@ -327,11 +411,10 @@ $(document).ready(() => {
     drawPassGraphic(sortedData, '#graphic');
     drawAttempts(sortedData);
 
-    // do an inital filter for Jason Witten to draw the first receiver chart
-    filterReceivers('Jason Witten');
-  });
-
-  $.getJSON('../js/rec-data.json', (data) => {
-    drawReceivers(data);
+    $.getJSON('../js/rec-data.json', (receiverData) => {
+      receivers = receiverData;
+      // do an inital filter for Jason Witten to draw the first receiver chart
+      filterReceivers('Jason Witten');
+    });
   });
 });

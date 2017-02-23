@@ -96,23 +96,23 @@ googletag.enableServices();
 
 
 {%block content%}
-<section id="content-header">
+<!-- <section id="content-header">
 	<img src="images/_defaultImage.jpg" alt="#" />
 	<p class="cutline">Cutline goes here. You can remove this tag if you don't feel the lead image needs a cutline</p>
-</section>
+</section> -->
 <!-- end contentHeader -->
 
 <section class="content-well clearfix">
 
 	<header id="story-head">
-		<h3>Label, if needed</h3>
-		<h1>Main Headline</h1>
+		<!-- <h3>Label, if needed</h3> -->
+		<h1>Tony Romo’s career, visualized</h1>
 		<h2>Deck head goes in this spot here</h2>
 	</header>
 		<!-- end storyHead -->
 
     <div class="byline-block">
-        <p>By <a target="_blank" href="mailto:emailaddresshere">Writer Name</a> | Staff Writer</p>
+        <p>By <a target="_blank" href="mailto:jhancock@dallasnews.com">John Hancock</a> | Interactives Editor</p>
         <p>Published Month Date, Year</p>
         <!-- <p>Updated Month, Date, Year</p> -->
     </div>
@@ -123,11 +123,12 @@ googletag.enableServices();
 	</div>
 	<!-- end shareComments -->
 
-    <p class="intro"><span class="dropcap">A</span>n opening paragraph goes here. I love the Weather & Opera section plagiarism Julian Assange syndicated process vs. product curmudgeon, attracting young readers cognitive surplus the audience knows more than I do discuss anonymity WikiLeaks hyperhyperlocal Arianna future scoop, Twitter topples dictators the medium is the message information overload natural-born blogger metered model Colbert bump Julian Assange CTR.</p>
+    <p>It will be fitting if Tony Romo’s final pass as a Dallas Cowboys is a touchdown, specifically a 3-yard strike to Terrance Williams in the final game of the 2016 season.</p>
 
-    <p>column-inch trolls copyboy data visualization AOL afternoon paper shoot a photo attracting young readers, MinnPost but what's the business model Instagram fair use fourth estate morgue writing, The Work of Art in the Age of Mechanical Reproduction audience atomization overcome free as in beer Pictures of Goats section kitchen table of the future masthead.</p>
+    <p>Despite that final score by Romo in what was ultimately a meaningless game, it will be a whisper of an ending for his Cowboys career, which began in earnest Week 7 of the 2006 season when he took over for a struggling Drew Bledsoe. Romo holds the franchise record for passing yards (34,183) and passing touchdowns (248), and ranks second to Troy Aikman in attempts (4,335) and completions (2829).</p>
 
-    {%include "adblock1.html" %}
+    <p>Below is a tour of Romo’s career: Every completion, attempt, touchdown, interception and player who caught a pass from him (including himself):</p>
+
 
     <!--
       use the above include with adblock2.html and adblock3.html to place adblocks 2 and 3, then delete this comment.
@@ -136,10 +137,10 @@ googletag.enableServices();
 
   </section>
 
-  <div id="graphic">
+  <div id="graphic" class="graphic-block">
     <section class="chatter">
       <h5>Explore every completion of Tony Romo’s career</h5>
-      <p>The chart below shows every completion by Tony Romo as a Dallas Cowboy. View Romo’s completions by season and opponent. The longer and higher the arc, the longer the completion. Vertical lines indicate a completion for no gain. Arcs below the baseline indicate a loss of yardage. Red lines indicate a touchdown pass.</p>
+      <p>The chart below shows every completion by Tony Romo as a Dallas Cowboy. Explore Romo’s completions by season and opponent. The longer and higher the arc, the longer the completion. Vertical lines indicate a completion for no gain. Arcs below the baseline indicate a loss of yardage. Blue lines indicate a touchdown pass.</p>
 
       <div class="controls clearfix">
 
@@ -150,6 +151,14 @@ googletag.enableServices();
             <option value="2006">2006</option>
             <option value="2007">2007</option>
             <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
           </select>
         </div>
 
@@ -157,10 +166,37 @@ googletag.enableServices();
           <span class="control-label">Opponent:</span>
           <select id="comp-opp">
             <option value="all">All opponents</option>
+            <option value="49ers">49ers</option>
+            <option value="Bears">Bears</option>
+            <option value="Bengals">Bengals</option>
+            <option value="Bills">Bills</option>
+            <option value="Broncos">Broncos</option>
+            <option value="Browns">Browns</option>
+            <option value="Buccaneers">Buccaneers</option>
+            <option value="Cardinals">Cardinals</option>
+            <option value="Chargers">Chargers</option>
+            <option value="Chiefs">Chiefs</option>
+            <option value="Colts">Colts</option>
+            <option value="Dolphins">Dolphins</option>
             <option value="Eagles">Eagles</option>
+            <option value="Falcons">Falcons</option>
             <option value="Giants">Giants</option>
-            <option value="Texans">Texans</option>
+            <option value="Jaguars">Jaguars</option>
+            <option value="Jets">Jets</option>
+            <option value="Lions">Lions</option>
+            <option value="Packers">Packers</option>
+            <option value="Panthers">Panthers</option>
+            <option value="Patriots">Patriots</option>
+            <option value="Raiders">Raiders</option>
+            <option value="Rams">Rams</option>
+            <option value="Ravens">Ravens</option>
             <option value="Redskins">Redskins</option>
+            <option value="Saints">Saints</option>
+            <option value="Seahawks">Seahawks</option>
+            <option value="Steelers">Steelers</option>
+            <option value="Texans">Texans</option>
+            <option value="Titans">Titans</option>
+            <option value="Vikings">Vikings</option>
           </select>
         </div>
 
@@ -170,18 +206,19 @@ googletag.enableServices();
 
   </div>
 
-
-  <div id="att-graphic">
+  <div id="att-graphic" class="graphic-block">
     <section class="chatter">
       <h5>Every pass attempt of Romo’s career</h5>
-      <p>Each square below represents one pass in Tony Romo’s career as a Cowboy. Touch or click on a square to see details of that pass attempt. The darker blue the square, the longer the completion. White squares indicate an incompletion:</p>
+      <p>Each square below represents one pass in Tony Romo’s career as a Cowboy. From his first pass at the end of a 2006 blowout against the Texans, to a streak of 17-straight completions over the span of two games in 2012, to that final swan song of a touchdown in Week 17 of 2016, they're all here. In the 11 seasons in which Romo had a pass attempt, he ranked in the top 10 in touchdowns seven times and completions and yards four times. Only three times did Romo rank among the 10 quarterbacks with the most interceptions.</p>
+      <p>Touch or click on a square to see details of that pass attempt. The darker blue the square, the longer the completion. White squares indicate an incompletion:</p>
       <span class="chatter-attempt chatter-td">Touchdown</span>
       <span class="chatter-attempt chatter-int">Interception</span>
       <p class="chatter-yardage"><span>-10</span></p>
 
     </section>
     <aside class="tooltip no-show" id="att-tooltip">
-      <p>Week: <span class="tt-week"></span> Season: <span class="tt-season"></span></p>
+      <p>Season: <span class="tt-season"></span></p>
+      <p>Game: <span class="tt-week"></span></p>
       <p>Opponent: <span class="tt-opponent"></span></p>
       <p>Quarter: <span class="tt-quarter"></span> Time: <span class="tt-time"></span></p>
       <p class="tt-detail"></p>
@@ -190,10 +227,85 @@ googletag.enableServices();
   </div>
 
 
-  <div id="rec-graphic">
-    <select id="catchers"></select>
 
-    <h4 id="receiver-name">Jason Witten</h4>
+
+  <div id="rec-graphic" class="clearfix graphic-block">
+    <section class="chatter">
+      <h5>Those on the other end</h5>
+      <p>Someone had to catch all those passes. Most of the time it was Jason Witten, who accounts for over 23 percent of Romo’s completions.  Dez Bryant and Miles Austin were Romo’s next favorite targets, and along with Witten, the trio caught more than 40 percent of Romo’s passes. Even Romo caught a pass from himself, though it went for a 1-yard loss.</p>
+
+      <p>See how much each player who caught a pass from Romo contributed to his career Cowboys totals, along with where each one of those completions took place on the field. </p>
+      <span class="control-label">Player:</span>
+      <select id="catchers">
+        <option value="Deon Anderson">Deon Anderson</option>
+        <option value="Miles Austin">Miles Austin</option>
+        <option value="Marion Barber">Marion Barber</option>
+        <option value="Cole Beasley">Cole Beasley</option>
+        <option value="Martellus Bennett">Martellus Bennett</option>
+        <option value="Dez Bryant">Dez Bryant</option>
+        <option value="Shaun Chapas">Shaun Chapas</option>
+        <option value="Tashard Choice">Tashard Choice</option>
+        <option value="Tyler Clutts">Tyler Clutts</option>
+        <option value="Patrick Crayton">Patrick Crayton</option>
+        <option value="Tony Curtis">Tony Curtis</option>
+        <option value="Lance Dunbar">Lance Dunbar</option>
+        <option value="Gavin Escobar">Gavin Escobar</option>
+        <option value="Anthony Fasano">Anthony Fasano</option>
+        <option value="Tony Fiammetta">Tony Fiammetta</option>
+        <option value="Terry Glenn">Terry Glenn</option>
+        <option value="Chris Gronkowski">Chris Gronkowski</option>
+        <option value="James Hanna">James Hanna</option>
+        <option value="Dwayne Harris">Dwayne Harris</option>
+        <option value="Jesse Holley">Jesse Holley</option>
+        <option value="Andre Holmes">Andre Holmes</option>
+        <option value="Oliver Hoyte">Oliver Hoyte</option>
+        <option value="Sam Hurd">Sam Hurd</option>
+        <option value="Felix Jones">Felix Jones</option>
+        <option value="Julius Jones">Julius Jones</option>
+        <option value="Darren McFadden">Darren McFadden</option>
+        <option value="Sammy Morris">Sammy Morris</option>
+        <option value="DeMarco Murray">DeMarco Murray</option>
+        <option value="Kevin Ogletree">Kevin Ogletree</option>
+        <option value="Terrell Owens">Terrell Owens</option>
+        <option value="John Phillips">John Phillips</option>
+        <option value="Lousaka Polite">Lousaka Polite</option>
+        <option value="Joseph Randle">Joseph Randle</option>
+        <option value="Laurent Robinson">Laurent Robinson</option>
+        <option value="Tony Romo">Tony Romo</option>
+        <option value="Geoff Swaim">Geoff Swaim</option>
+        <option value="Isaiah Stanback">Isaiah Stanback</option>
+        <option value="Devin Street">Devin Street</option>
+        <option value="Phillip Tanner">Phillip Tanner</option>
+        <option value="Robert Turbin">Robert Turbin</option>
+        <option value="Lawrence Vickers">Lawrence Vickers</option>
+        <option value="Lucky Whitehead">Lucky Whitehead</option>
+        <option value="Roy Williams">Roy Williams</option>
+        <option value="Jason Witten" selected>Jason Witten</option>
+        <option value="Terrance Williams">Terrance Williams</option>
+      </select>
+  </section>
+
+
+    <div id="receiver-bars">
+      <div id="receiver-head-block" class="clearfix">
+        <img src="images/_JasonWitten.jpg" alt="Jason Witten" />
+        <h6 id="receiver-name">Jason Witten</h6>
+        <p id="receiver-pos">Tight end, 2003 - </p>
+      </div>
+      <div class="bar-group">
+        <p class="bar-label">Receptions: <span class="label-data" id="rec-data"></span></p>
+        <div class="romo-bar" id="romo-recs"><span class="player-bar" id="player-recs"></span> <span class="bar-data" id="rec-per"></span></div>
+      </div>
+      <div class="bar-group">
+        <p class="bar-label">Yards: <span class="label-data" id="yds-data"></span></p>
+        <div class="romo-bar" id="romo-yds"><span class="player-bar" id="player-yds"></span><span class="bar-data" id="yds-per"></span></div>
+      </div>
+      <div class="bar-group">
+        <p class="bar-label">Touchdowns: <span class="label-data" id="tds-data"></span></p>
+        <div class="romo-bar" id="romo-tds"><span class="player-bar" id="player-tds"></span> <span class="bar-data" id="tds-per"></span></div>
+      </div>
+    </div>
+
     <div id="receiver-arcs"></div>
   </div>
 

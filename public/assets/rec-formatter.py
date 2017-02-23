@@ -1,7 +1,7 @@
 import json
 import pprint
 
-plays = open("/Users/johnhancock/Desktop/interactives/working/romo-career/build/static/js/data.json").read()
+plays = open("/Users/johnhancock/Desktop/interactives/working/romo-career/build/static/js/data2.json").read()
 
 
 data = json.loads(plays)

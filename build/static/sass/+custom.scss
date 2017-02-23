@@ -12,24 +12,34 @@
 
 #graphic {
   width: 95%;
-  min-height: 95vw / 3;
   max-width: 1000px;
+  margin: 4.8rem auto 4.8rem ;
+  svg {
+    margin-top: -5vw;
+  }
+}
+
+.graphic-block {
+  padding: 0 0 4.8rem;
   margin: 0 auto 4.8rem;
+  border-bottom: 1px solid $black235;
 }
 
 line, path {
   stroke: $black50;
-  stroke-width: 3;
+  stroke-width: 1;
 }
 path {
   fill: none;
   stroke-width: .25;
   stroke: $black121;
   &.touchdown {
-    stroke: $chartRed;
+    stroke: $dmnblue;
     stroke-width: .5;
   }
 }
+
+
 
 .axis path, .axis line {
   fill: none;
@@ -49,7 +59,6 @@ path {
 #att-graphic, #rec-graphic {
   width: 95%;
   max-width: 1000px;
-  margin: 0 auto;
   position: relative;
 }
 
@@ -78,39 +87,37 @@ path {
 .season {
   display: block;
   width: 100%;
-  padding: 10px;
+  margin-bottom: 1.2rem;
   position: relative;
   .season-label {
-    display: inline;
-    font-weight: bold;
+    display: inline-block;
     font-family: $sans;
-    @include type(16px, 35px, 0)
-    float: left;
-    width: 60px;
-    text-align: center;
-    padding-right: 5px;
+    @include type(13px, 35px, 0)
+    width: 100%;
   }
 }
 .attempt {
   display: inline-block;
   float: left;
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   background-color: $black215;
-  margin: 0 5px 5px 0;
+  margin: 0 3px 3px 0;
   text-align: center;
   font-weight: bold;
-  line-height: 15px;
-  font-size: 11px;
-  border-radius: 2px;
+  line-height:8px;
+  font-size: 8px;
   &.interception, &.incomplete {
     background-color: rgb(255,255,255) !important;
     border: 1px solid $black215;
     cursor: default;
   }
+  &.interception {
+    background-color: $chartRed !important;
+    border: none;
+  }
   &.touchdown {
-    color: white;
-    border: 2px solid black;
+    background-color: $chartYellow !important;
   }
 }
 
@@ -142,7 +149,12 @@ path {
     font-size: 1.1rem;
     line-height: 1.5rem;
     margin-top: .6rem;
+    display: none;
   }
+}
+
+.touch .tooltip button {
+  display: inline-block;
 }
 
 .chatter {
@@ -150,7 +162,7 @@ path {
     font-weight: bold;
   }
   p {
-    @include type(1.4rem, 1.8rem, 1.8rem);
+    @include type(1.4rem, 1.8rem, .9rem);
   }
   li {
     min-width: 50px;
@@ -185,43 +197,40 @@ path {
 
 
   .chatter-attempt {
-    padding-left: 20px;
+    padding-left: 15px;
     position: relative;
     display: inline-block;
     margin-right: 15px;
     margin-bottom: 0;
     text-transform: uppercase;
     font-weight: bold;
-    @include type(12px, 15px)
+    @include type(12px, 10px)
     &:before {
-      @include psuedoElement(15px, 15px, absolute);
+      @include psuedoElement(10px, 10px, absolute);
       display: block;
       left: 0;
       top: 0;
-      border-radius: 2px;
       box-sizing: border-box;
     }
     &.chatter-td:before {
-      border: 2px solid black;
-      background-color: rgb(146, 169, 191);
+      background-color: $chartYellow;
     }
     &.chatter-int:before {
-      border: 1px solid #d7d7d7;
-      content: "I";
       text-align: center;
       font-weight: bold;
       font-size: 11px;
+      background-color: $chartRed;
     }
   }
   .chatter-yardage {
     width: 150px;
     display: inline-block;
     height: 18px;
-    background: #e9f4fd; /* Old browsers */
-    background: -moz-linear-gradient(left, #e9f4fd 0%, #0b3f65 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #e9f4fd 0%,#0b3f65 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #e9f4fd 0%,#0b3f65 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9f4fd', endColorstr='#0b3f65',GradientType=1 ); /* IE6-9 */
+    background: #08306b; /* Old browsers */
+    background: -moz-linear-gradient(left, #deebf7 0%, #08306b 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #deebf7 0%,#08306b 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #deebf7 0%,#08306b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deebf7', endColorstr='#08306b',GradientType=1 ); /* IE6-9 */
     position: relative;
     margin-bottom: 0;
     font-weight: bold;
@@ -249,8 +258,131 @@ path {
   }
 }
 
+#rec-graphic {
+  .chatter {
+    margin-bottom: 2.4rem;
+  }
+}
+
+#receiver-head-block {
+  margin-bottom: 1.2rem;
+  img {
+    width: 50px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 10px;
+  }
+  h6, p {
+    font-weight: bold;
+    display: inline-block;
+    float: left;
+    width: calc(100% - 60px);
+    margin-bottom: 0;
+  }
+  p {
+    @include type(1.2rem, 1.5rem, 0);
+    font-weight: normal;
+  }
+
+}
+
+#receiver-bars {
+  width: 38%;
+  float: left;
+  padding-right: 2%;
+  border-right: 1px solid $black235;
+}
+.bar-group {
+  margin-bottom: 1.2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid $black235;
+  &:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+.romo-bar {
+  height: 20px;
+  display: block;
+  background-color: $black235;
+  position: relative;
+}
+.player-bar {
+  height: 20px;
+  @include transition(all, .25s, ease-out);
+  background-color: $dmnblue;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.bar-label {
+  @include type(1.2rem, 1.5rem, .3rem);
+  font-weight: bold;
+  text-transform: uppercase;
+  span {
+    font-weight: normal;
+  }
+  &:first-of-type {
+    padding-top: 0;
+    border-top: none;
+  }
+}
+.bar-data {
+  position: absolute;
+  @include type(1.1rem, 20px, 0);
+  padding-left: 5px;
+  font-weight: bold;
+  @include transition(all, .25s, ease-out);
+}
+
+
 #receiver-arcs {
-  min-height: 300px;
+  max-height: 200px;
+  width: 60%;
+  float: right;
+  path {
+    stroke: $black50;
+    &.touchdown {
+      stroke: $dmnblue;
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  #receiver-bars {
+    padding-right: 0;
+    border-right: none;
+    width: 100%;
+    float: none;
+  }
+  .bar-group {
+    width: 32%;
+    float: left;
+    margin-right: 2%;
+    border-bottom: 0;
+    padding-bottom: 0;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+  #receiver-arcs {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .bar-group {
+    width: 100%;
+    float: none;
+    margin-right: 0;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid $black235;
+    &:last-of-type {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
 }
 
 .no-show {
