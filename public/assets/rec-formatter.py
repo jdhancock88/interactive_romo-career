@@ -16,9 +16,9 @@ def find(lst, key, value):
 
 receivers = []
 print data[0]["plays"][2]
-for x in range(0, (l-1)):
+for datum in data:
 
-    season_plays = data[x]["plays"]
+    season_plays = datum["plays"]
     for play in season_plays:
         target = play["target"]
         print target
@@ -52,7 +52,7 @@ for x in range(0, (l-1)):
 print receivers
 
 
-romo_receivers = open("/Users/johnhancock/Desktop/interactives/working/romo-career/build/static/js/rec-data.json", "w")
+romo_receivers = open("/Users/johnhancock/Desktop/interactives/working/romo-career/build/static/js/rec-data2.json", "w")
 
 json.dump(receivers, romo_receivers)
 

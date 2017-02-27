@@ -837,7 +837,7 @@ XIX. ADS
     padding: 2.4rem 0; } }
 
 #graphic {
-  width: 95%;
+  width: 90%;
   max-width: 1000px;
   margin: 4.8rem auto 4.8rem; }
   #graphic svg {
@@ -846,7 +846,20 @@ XIX. ADS
 .graphic-block {
   padding: 0 0 4.8rem;
   margin: 0 auto 4.8rem;
-  border-bottom: 1px solid #ebebeb; }
+  border-bottom: 1px solid #ebebeb;
+  width: 90%;
+  max-width: 1000px; }
+  .graphic-block.no-pad {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 0; }
+  .graphic-block .source {
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+    margin-bottom: 0;
+    text-align: right;
+    margin-top: 1.2rem;
+    clear: both; }
 
 line, path {
   stroke: #323232;
@@ -873,11 +886,6 @@ path {
   text-transform: uppercase;
   font-size: 1.2rem; }
 
-#att-graphic, #rec-graphic {
-  width: 95%;
-  max-width: 1000px;
-  position: relative; }
-
 #rec-graphic table {
   width: 20%; }
 
@@ -902,11 +910,13 @@ path {
   width: 100%;
   margin-bottom: 1.2rem;
   position: relative; }
+  .season:last-of-type {
+    margin-bottom: 0; }
   .season .season-label {
     display: inline-block;
     font-family: "Gotham A", "Gotham B", Arial, sans-serif;
-    font-size: 13px;
-    line-height: 35px;
+    font-size: 1.4rem;
+    line-height: 3.6rem;
     margin-bottom: 0;
     width: 100%; }
 
@@ -963,115 +973,116 @@ path {
 .touch .tooltip button {
   display: inline-block; }
 
-.chatter h5 {
-  font-weight: bold; }
-
-.chatter p {
-  font-size: 1.4rem;
-  line-height: 1.8rem;
-  margin-bottom: 0.9rem; }
-
-.chatter li {
-  min-width: 50px;
-  padding: 0 5px;
-  display: inline-block;
-  font-size: 1.3rem;
-  line-height: 2.4rem;
-  margin-bottom: 0;
-  background-color: #ebebeb;
-  text-align: center;
-  cursor: pointer;
-  font-weight: bold; }
-  .chatter li.active {
-    background-color: #0185d3;
-    color: white; }
-
-.chatter .control-group {
-  min-width: 100px;
-  float: left;
-  margin-right: 20px;
-  max-width: 200px; }
-  .chatter .control-group select {
-    min-width: 100px; }
-
-.chatter .control-label {
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-right: 5px;
-  text-transform: uppercase; }
-
-.chatter .chatter-attempt {
-  padding-left: 15px;
+.chatter {
   position: relative;
-  display: inline-block;
-  margin-right: 15px;
-  margin-bottom: 0;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 10px;
-  margin-bottom: 1.2rem; }
-  .chatter .chatter-attempt:before {
-    content: "";
-    display: block;
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    display: block;
-    left: 0;
-    top: 0;
-    box-sizing: border-box; }
-  .chatter .chatter-attempt.chatter-td:before {
-    background-color: #fec44f; }
-  .chatter .chatter-attempt.chatter-int:before {
+  z-index: 10; }
+  .chatter h5 {
+    font-weight: bold; }
+  .chatter p {
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+    margin-bottom: 0.9rem; }
+  .chatter li {
+    min-width: 50px;
+    padding: 0 5px;
+    display: inline-block;
+    font-size: 1.3rem;
+    line-height: 2.4rem;
+    margin-bottom: 0;
+    background-color: #ebebeb;
     text-align: center;
+    cursor: pointer;
+    font-weight: bold; }
+    .chatter li.active {
+      background-color: #0185d3;
+      color: white; }
+  .chatter .control-group {
+    min-width: 100px;
+    float: left;
+    margin: 1.2rem 20px 1.2rem 0;
+    max-width: 200px; }
+    .chatter .control-group.att-control-group {
+      float: none;
+      display: inline-block; }
+    .chatter .control-group:last-of-type {
+      margin-right: 0; }
+  .chatter .control-label {
     font-weight: bold;
-    font-size: 11px;
-    background-color: #e34e36; }
-
-.chatter .chatter-yardage {
-  width: 150px;
-  display: inline-block;
-  height: 18px;
-  background: #08306b;
-  /* Old browsers */
-  background: -moz-linear-gradient(left, #deebf7 0%, #08306b 100%);
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(left, #deebf7 0%, #08306b 100%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to right, #deebf7 0%, #08306b 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deebf7', endColorstr='#08306b',GradientType=1 );
-  /* IE6-9 */
-  position: relative;
-  margin-bottom: 0;
-  font-weight: bold;
-  font-size: 12px; }
-  .chatter .chatter-yardage span {
-    padding-left: 5px; }
-  .chatter .chatter-yardage:before {
-    content: "";
-    display: block;
-    width: 40px;
-    height: 15px;
+    font-size: 1.2rem;
+    margin-right: 5px;
+    text-transform: uppercase; }
+  .chatter .chatter-attempt {
+    padding-left: 15px;
     position: relative;
-    content: "Yards";
-    position: absolute;
-    left: 50%;
-    margin-left: -20px;
-    color: white; }
-  .chatter .chatter-yardage:after {
-    content: "";
-    display: block;
-    width: 11px;
-    height: 15px;
-    position: absolute;
-    content: "100";
-    right: 20px;
-    text-align: right;
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 0;
+    text-transform: uppercase;
     font-weight: bold;
-    color: white;
-    top: 0; }
+    font-size: 12px;
+    line-height: 10px;
+    margin-bottom: 1.2rem; }
+    .chatter .chatter-attempt:before {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      display: block;
+      left: 0;
+      top: 0;
+      box-sizing: border-box; }
+    .chatter .chatter-attempt.chatter-td:before {
+      background-color: #fec44f; }
+    .chatter .chatter-attempt.chatter-int:before {
+      text-align: center;
+      font-weight: bold;
+      font-size: 11px;
+      background-color: #e34e36; }
+  .chatter .chatter-yardage {
+    width: 150px;
+    display: inline-block;
+    height: 18px;
+    background: #08306b;
+    /* Old browsers */
+    background: -moz-linear-gradient(left, #deebf7 0%, #08306b 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #deebf7 0%, #08306b 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #deebf7 0%, #08306b 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deebf7', endColorstr='#08306b',GradientType=1 );
+    /* IE6-9 */
+    position: relative;
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 12px;
+    margin-right: 15px; }
+    .chatter .chatter-yardage span {
+      padding-left: 5px; }
+    .chatter .chatter-yardage:before {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 15px;
+      position: relative;
+      content: "Yards";
+      position: absolute;
+      left: 50%;
+      margin-left: -20px;
+      color: white; }
+    .chatter .chatter-yardage:after {
+      content: "";
+      display: block;
+      width: 11px;
+      height: 15px;
+      position: absolute;
+      content: "100";
+      right: 20px;
+      text-align: right;
+      font-weight: bold;
+      color: white;
+      top: 0; }
 
 #rec-graphic .chatter {
   margin-bottom: 2.4rem; }
@@ -1096,7 +1107,7 @@ path {
     font-weight: normal; }
 
 #receiver-bars {
-  width: 38%;
+  width: 28%;
   float: left;
   padding-right: 2%;
   border-right: 1px solid #ebebeb; }
@@ -1152,8 +1163,7 @@ path {
   transition: all 0.25s ease-out; }
 
 #receiver-arcs {
-  max-height: 200px;
-  width: 60%;
+  width: 70%;
   float: right; }
   #receiver-arcs path {
     stroke: #323232; }
@@ -1190,6 +1200,13 @@ path {
 
 .no-show {
   display: none; }
+
+.lede-image {
+  max-width: 300px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  margin-bottom: -130px; }
 
 .interactive-footer {
   min-height: 97px;

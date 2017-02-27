@@ -19,7 +19,7 @@ $(document).ready(() => {
   let receivers;
 
   const romoCareer = [
-    { season: '2006', comps: 237, atts: 366, yds: '3,104', tds: 20 },
+    { season: '2006', comps: 237, atts: 366, yds: '3,092', tds: 20 },
     { season: '2007', comps: 353, atts: 556, yds: '4,412', tds: 37 },
     { season: '2008', comps: 276, atts: 450, yds: '3,448', tds: 26 },
     { season: '2009', comps: 392, atts: 620, yds: '4,925', tds: 28 },
@@ -72,7 +72,7 @@ $(document).ready(() => {
   /////////////////////////////////////////////////////////////////////////// */
 
   function drawPassGraphic(data, target) {
-    let margin = {
+    const margin = {
       top: 0,
       right: 10,
       bottom: 40,
@@ -90,7 +90,7 @@ $(document).ready(() => {
     // the arc modifier is a factor of the height of the graphic
     let arcMod = (height / 100) * 1.5;
 
-    if (target !== '#graphic') {
+    if (target !== '#arc-graphic') {
       height = 198;
       arcMod = (height / 100) * 1.7;
       margin.bottom = 35;
@@ -211,7 +211,7 @@ $(document).ready(() => {
     seasons.append('span')
       .attr('class', 'season-label')
       .html((d, i) => {
-        return (`<strong>${d.season_year}:</strong> ${romoCareer[i].comps}-${romoCareer[i].atts}, ${romoCareer[i].yds} yards, ${romoCareer[i].tds} TDs`);
+        return (`<strong>${d.season_year}:</strong> ${romoCareer[i].comps}-for-${romoCareer[i].atts}, ${romoCareer[i].yds} yards, ${romoCareer[i].tds} TDs`);
       });
 
     // append a span for each attempt in a season
@@ -232,33 +232,6 @@ $(document).ready(() => {
       })
       .on('mousemove', d => displayTooltip(event, d, '#att-tooltip'))
       .on('mouseout', () => d3.select('#att-tooltip').attr('class', 'tooltip no-show'));
-
-    // testing!!!!!!!
-
-    let streak = 0;
-    let high = 0;
-    $.each($('.attempt'), function () {
-      if ($(this).hasClass('interception') === false && $(this).hasClass('incomplete') === false) {
-        streak += 1;
-      } else {
-        if (streak >= high) {
-          high = streak;
-          console.log(high, $(this).parent().attr('class'));
-        }
-        streak = 0;
-      }
-    });
-
-    $.each($('.season'), function () {
-      let comps = 0;
-      $.each($(this).children('.attempt'), function () {
-        if ($(this).hasClass('interception') === false && $(this).hasClass('incomplete') === false) {
-          comps += 1;
-        }
-      });
-      console.log(comps, $(this).children('.attempt').length);
-    });
-
   }
 
   /*
@@ -284,21 +257,42 @@ $(document).ready(() => {
     }
   }
 
-  $('#comp-season').change(function () {
+  $('#comp-season').change(() => {
     selSeason = $('#comp-season option:selected').attr('value');
     viewComps();
   });
 
-  $('#comp-opp').change(function () {
+  $('#comp-opp').change(() => {
     selOpp = $('#comp-opp option:selected').attr('value');
     viewComps();
   });
 
 
+  /*
+  ///////////////////////////////////////////////////////////////////////////
+  // CONTROLLING WHICH SEASONS GET DISPLAYED IN THE ATTEMPTS CHART
+  ///////////////////////////////////////////////////////////////////////////
+  */
+
+  $('#att-season').change(() => {
+    const selectedSeason = $('#att-season option:selected').attr('value');
+    if (selectedSeason !== 'all') {
+      $('.season').addClass('no-show');
+      $(`.season-${selectedSeason}`).removeClass('no-show');
+    } else {
+      $('.season').removeClass('no-show');
+    }
+  });
+
+
+  /*
+  ///////////////////////////////////////////////////////////////////////////
+  // DRAWING THE BARS FOR THE RECEIVERS
+  ///////////////////////////////////////////////////////////////////////////
+  */
+
   function drawPassBars(receiver) {
-    console.log(receiver);
     const target = _.find(receivers, ['receiver', receiver]);
-    console.log(target);
 
     let recPer = parseFloat(((target.catches / romoComps) * 100).toFixed(1));
     let ydsPer = parseFloat(((target.yards / romoYds) * 100).toFixed(1));
@@ -308,7 +302,6 @@ $(document).ready(() => {
     ydsPer = ydsPer > 0 ? ydsPer : 0;
     tdsPer = tdsPer > 0 ? tdsPer : 0;
 
-    console.log(recPer, ydsPer, tdsPer);
     $('#player-recs').css('width', `${recPer}%`);
     $('#player-yds').css('width', `${ydsPer}%`);
     $('#player-tds').css('width', `${tdsPer}%`);
@@ -355,7 +348,7 @@ $(document).ready(() => {
         season_year: sortedData[i].season_year,
         plays: [],
       };
-      $.each(sortedData[i].plays, function(k, v) {
+      $.each(sortedData[i].plays, function (k, v) {
         if (v.target === selected) {
           season.plays.push(v);
         }
@@ -399,7 +392,7 @@ $(document).ready(() => {
   ///////////////////////////////////////////////////////////////////////////
   */
 
-  $.getJSON('../js/data2.json', (data) => {
+  $.getJSON('js/data3.json', (data) => {
     // sorts data by week, quarter and time
     data.forEach((value) => {
       const tempYear = value;
@@ -408,10 +401,10 @@ $(document).ready(() => {
     });
 
     // passes off sorted data to arc drawing function
-    drawPassGraphic(sortedData, '#graphic');
+    drawPassGraphic(sortedData, '#arc-graphic');
     drawAttempts(sortedData);
 
-    $.getJSON('../js/rec-data.json', (receiverData) => {
+    $.getJSON('js/rec-data.json', (receiverData) => {
       receivers = receiverData;
       // do an inital filter for Jason Witten to draw the first receiver chart
       filterReceivers('Jason Witten');

@@ -54,11 +54,10 @@ var adSlot0 = googletag.defineSlot('/' + DFP_networkId + '/' + DFP_sitepage, DFP
 adSlot0.setTargeting("position", "x01");
 adSlot0.addService(googletag.pubads());
 
-/*
 var adSlot1 = googletag.defineSlot('/' + DFP_networkId + '/' + DFP_sitepage, DFPSlotSizes, "dfpAdPositionMiddle");
 adSlot1.setTargeting("position", "x02");
 adSlot1.addService(googletag.pubads());
-*/
+
 
 /*
 var adSlot2 = googletag.defineSlot('/' + DFP_networkId + '/' + DFP_sitepage, DFPSlotSizes, "dfpAdPositionBottom");
@@ -69,16 +68,15 @@ adSlot2.addService(googletag.pubads());
 else
 {
 var DFP_sitepage = "DMN/interactives";
- DFPSlotSizes = [728,90]
+DFPSlotSizes = [[728,90],[970,30],[970,90],[970,250]]
 var adSlot0 = googletag.defineSlot('/' + DFP_networkId + '/' + DFP_sitepage, DFPSlotSizes, "dfpAdPositionTop");
 adSlot0.setTargeting("position", "Top");
 adSlot0.addService(googletag.pubads());
 
-/*
 var adSlot1 = googletag.defineSlot('/' + DFP_networkId + '/' + DFP_sitepage, DFPSlotSizes, "dfpAdPositionMiddle");
 adSlot1.setTargeting("position", "Top");
 adSlot1.addService(googletag.pubads());
-*/
+
 
 /*
 var adSlot2 = googletag.defineSlot('/' + DFP_networkId + '/' + DFP_sitepage, DFPSlotSizes, "dfpAdPositionBottom");
@@ -103,11 +101,11 @@ googletag.enableServices();
 <!-- end contentHeader -->
 
 <section class="content-well clearfix">
-
+  <img class="lede-image" src="images/_romo-lede.jpg" alt="Tony Romo" />
 	<header id="story-head">
 		<!-- <h3>Label, if needed</h3> -->
 		<h1>Tony Romo’s career, visualized</h1>
-		<h2>Deck head goes in this spot here</h2>
+		<h2>Exploring all 4,520 passes No. 9 has thrown as a Dallas Cowboy</h2>
 	</header>
 		<!-- end storyHead -->
 
@@ -123,11 +121,11 @@ googletag.enableServices();
 	</div>
 	<!-- end shareComments -->
 
-    <p>It will be fitting if Tony Romo’s final pass as a Dallas Cowboys is a touchdown, specifically a 3-yard strike to Terrance Williams in the final game of the 2016 season.</p>
+    <p>It will be fitting if Tony Romo’s final pass as a Dallas Cowboy is a touchdown, specifically a 3-yard strike to Terrance Williams in the final game of the 2016 season.</p>
 
-    <p>Despite that final score by Romo in what was ultimately a meaningless game, it will be a whisper of an ending for his Cowboys career, which began in earnest Week 7 of the 2006 season when he took over for a struggling Drew Bledsoe. Romo holds the franchise record for passing yards (34,183) and passing touchdowns (248), and ranks second to Troy Aikman in attempts (4,335) and completions (2829).</p>
+    <p>Despite that final score by Romo in what was ultimately a meaningless game, it will be a whisper of an ending for his Cowboys career, which began in earnest Week 7 of the 2006 season when he took over for a struggling Drew Bledsoe. Romo holds the franchise record for regular season passing yards (34,183) and passing touchdowns (248), and ranks second to Troy Aikman in regular season attempts (4,335) and completions (2829).</p>
 
-    <p>Below is a tour of Romo’s career: Every completion, attempt, touchdown, interception and player who caught a pass from him (including himself):</p>
+    <p>Join us for a tour of Romo’s career: Every completion, attempt, touchdown, interception and player who caught a pass from him (including himself):</p>
 
 
     <!--
@@ -135,12 +133,12 @@ googletag.enableServices();
       it won't self-destruct, but it is cleaner
     -->
 
-  </section>
+  {% include "adblock1.html" %}
 
   <div id="graphic" class="graphic-block">
     <section class="chatter">
-      <h5>Explore every completion of Tony Romo’s career</h5>
-      <p>The chart below shows every completion by Tony Romo as a Dallas Cowboy. Explore Romo’s completions by season and opponent. The longer and higher the arc, the longer the completion. Vertical lines indicate a completion for no gain. Arcs below the baseline indicate a loss of yardage. Blue lines indicate a touchdown pass.</p>
+      <h5>Every completion of Tony Romo’s career</h5>
+      <p>The chart below shows every regular and postseason completion by Tony Romo as a Dallas Cowboy. Explore Romo’s completions by year and opponent. The longer and higher the arc, the longer the completion. Vertical lines indicate a completion for no gain. Arcs below the baseline indicate a loss of yardage. Blue lines indicate a touchdown pass.</p>
 
       <div class="controls clearfix">
 
@@ -163,7 +161,7 @@ googletag.enableServices();
         </div>
 
         <div class="control-group">
-          <span class="control-label">Opponent:</span>
+          <span class="control-label">Opp:</span>
           <select id="comp-opp">
             <option value="all">All opponents</option>
             <option value="49ers">49ers</option>
@@ -201,19 +199,40 @@ googletag.enableServices();
         </div>
 
       </div>
-
     </section>
 
+    <div id="arc-graphic"></div>
+    <p class="source">Source: <a href="http://www.pro-football-reference.com/" target="_blank">Pro Football Reference</a></p>
   </div>
 
-  <div id="att-graphic" class="graphic-block">
+
+
+  <div class="graphic-block">
     <section class="chatter">
       <h5>Every pass attempt of Romo’s career</h5>
-      <p>Each square below represents one pass in Tony Romo’s career as a Cowboy. From his first pass at the end of a 2006 blowout against the Texans, to a streak of 17-straight completions over the span of two games in 2012, to that final swan song of a touchdown in Week 17 of 2016, they're all here. In the 11 seasons in which Romo had a pass attempt, he ranked in the top 10 in touchdowns seven times and completions and yards four times. Only three times did Romo rank among the 10 quarterbacks with the most interceptions.</p>
+      <p>Each square below represents one pass in Tony Romo’s career as a Cowboy. From his first pass at the end of a 2006 blowout against the Texans to that final swan song of a touchdown in Week 17 of 2016, they're all here. In the 11 seasons in which Romo had a pass attempt, he ranked in the top 10 in touchdowns seven times and completions and yards four times.</p>
       <p>Touch or click on a square to see details of that pass attempt. The darker blue the square, the longer the completion. White squares indicate an incompletion:</p>
-      <span class="chatter-attempt chatter-td">Touchdown</span>
-      <span class="chatter-attempt chatter-int">Interception</span>
+      <span class="chatter-attempt chatter-td">TD</span>
+      <span class="chatter-attempt chatter-int">INT</span>
       <p class="chatter-yardage"><span>-10</span></p>
+
+      <div class="control-group att-control-group">
+        <span class="control-label">Season:</span>
+        <select id="att-season">
+          <option value="all">All seasons</option>
+          <option value="2006">2006</option>
+          <option value="2007">2007</option>
+          <option value="2008">2008</option>
+          <option value="2009">2009</option>
+          <option value="2010">2010</option>
+          <option value="2011">2011</option>
+          <option value="2012">2012</option>
+          <option value="2013">2013</option>
+          <option value="2014">2014</option>
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+        </select>
+      </div>
 
     </section>
     <aside class="tooltip no-show" id="att-tooltip">
@@ -224,12 +243,17 @@ googletag.enableServices();
       <p class="tt-detail"></p>
       <button>Close</button>
     </aside>
+
+    <div id="att-graphic"></div>
+
+    <p class="source">Source: NFL GSIS, <a href="http://www.pro-football-reference.com/" target="_blank">Pro Football Reference</a> and <a href="http://www.espn.com">ESPN</a></p>
+
   </div>
 
 
 
 
-  <div id="rec-graphic" class="clearfix graphic-block">
+  <div id="rec-graphic" class="clearfix graphic-block no-pad">
     <section class="chatter">
       <h5>Those on the other end</h5>
       <p>Someone had to catch all those passes. Most of the time it was Jason Witten, who accounts for over 23 percent of Romo’s completions.  Dez Bryant and Miles Austin were Romo’s next favorite targets, and along with Witten, the trio caught more than 40 percent of Romo’s passes. Even Romo caught a pass from himself, though it went for a 1-yard loss.</p>
@@ -285,34 +309,38 @@ googletag.enableServices();
       </select>
   </section>
 
+    <div class="graphic-pair clearfix">
+      <div id="receiver-bars">
+        <div id="receiver-head-block" class="clearfix">
+          <img src="images/_JasonWitten.jpg" alt="Jason Witten" />
+          <h6 id="receiver-name">Jason Witten</h6>
+          <p id="receiver-pos">Tight end, 2003 - </p>
+        </div>
+        <div class="bar-group">
+          <p class="bar-label">Receptions: <span class="label-data" id="rec-data"></span></p>
+          <div class="romo-bar" id="romo-recs"><span class="player-bar" id="player-recs"></span> <span class="bar-data" id="rec-per"></span></div>
+        </div>
+        <div class="bar-group">
+          <p class="bar-label">Yards: <span class="label-data" id="yds-data"></span></p>
+          <div class="romo-bar" id="romo-yds"><span class="player-bar" id="player-yds"></span><span class="bar-data" id="yds-per"></span></div>
+        </div>
+        <div class="bar-group">
+          <p class="bar-label">Touchdowns: <span class="label-data" id="tds-data"></span></p>
+          <div class="romo-bar" id="romo-tds"><span class="player-bar" id="player-tds"></span> <span class="bar-data" id="tds-per"></span></div>
+        </div>
+      </div>
 
-    <div id="receiver-bars">
-      <div id="receiver-head-block" class="clearfix">
-        <img src="images/_JasonWitten.jpg" alt="Jason Witten" />
-        <h6 id="receiver-name">Jason Witten</h6>
-        <p id="receiver-pos">Tight end, 2003 - </p>
-      </div>
-      <div class="bar-group">
-        <p class="bar-label">Receptions: <span class="label-data" id="rec-data"></span></p>
-        <div class="romo-bar" id="romo-recs"><span class="player-bar" id="player-recs"></span> <span class="bar-data" id="rec-per"></span></div>
-      </div>
-      <div class="bar-group">
-        <p class="bar-label">Yards: <span class="label-data" id="yds-data"></span></p>
-        <div class="romo-bar" id="romo-yds"><span class="player-bar" id="player-yds"></span><span class="bar-data" id="yds-per"></span></div>
-      </div>
-      <div class="bar-group">
-        <p class="bar-label">Touchdowns: <span class="label-data" id="tds-data"></span></p>
-        <div class="romo-bar" id="romo-tds"><span class="player-bar" id="player-tds"></span> <span class="bar-data" id="tds-per"></span></div>
-      </div>
+      <div id="receiver-arcs"></div>
     </div>
 
-    <div id="receiver-arcs"></div>
+    <p class="source">Source: NFL GSIS, <a href="http://www.pro-football-reference.com/" target="_blank">Pro Football Reference</a> and <a href="http://www.espn.com">ESPN</a></p>
   </div>
 
-  <section class="content-well">
 
 
-    <p class="twitter-tag">Follow writer name on Twitter at <a href="urlhere">@twittertag.</a></p>
+  {%include "adblock2.html" %}
+
+
 
 
     <section class="credits clearfix">
