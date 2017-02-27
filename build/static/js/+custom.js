@@ -210,9 +210,7 @@ $(document).ready(() => {
     // append a season year label to each .season div
     seasons.append('span')
       .attr('class', 'season-label')
-      .html((d, i) => {
-        return (`<strong>${d.season_year}:</strong> ${romoCareer[i].comps}-for-${romoCareer[i].atts}, ${romoCareer[i].yds} yards, ${romoCareer[i].tds} TDs`);
-      });
+      .html((d, i) => (`<strong>${d.season_year}:</strong> ${romoCareer[i].comps}-for-${romoCareer[i].atts}, ${romoCareer[i].yds} yards, ${romoCareer[i].tds} TDs`));
 
     // append a span for each attempt in a season
     seasons.selectAll('attempt')
@@ -348,7 +346,7 @@ $(document).ready(() => {
         season_year: sortedData[i].season_year,
         plays: [],
       };
-      $.each(sortedData[i].plays, function (k, v) {
+      $.each(sortedData[i].plays, (k, v) => {
         if (v.target === selected) {
           season.plays.push(v);
         }
@@ -373,8 +371,8 @@ $(document).ready(() => {
 
   // when the dropdown is changed, grab the value of the selected option and
   // hand it off to the filterReceivers function
-  $('#catchers').change(function () {
-    const selectedRec = $(this).val();
+  $('#catchers').change(() => {
+    const selectedRec = $('#catchers option:selected').attr('value');
     filterReceivers(selectedRec);
   });
 
@@ -392,7 +390,7 @@ $(document).ready(() => {
   ///////////////////////////////////////////////////////////////////////////
   */
 
-  $.getJSON('js/data3.json', (data) => {
+  $.getJSON('js/data.json', (data) => {
     // sorts data by week, quarter and time
     data.forEach((value) => {
       const tempYear = value;
