@@ -4,12 +4,12 @@ global $:true document:true d3:true mapboxgl: true window: true _:true event: tr
 
 
 $(document).ready(() => {
-  // custom scripting goes here
-
+  // checking for touch events to show the close button in our attempts tooltip
   if (Modernizr.touchevents) {
     $('body').addClass('touch');
   }
 
+  // variables we're going to use throughout
   const sortedData = [];
   const romoComps = 2943;
   const romoTDs = 256;
@@ -31,6 +31,7 @@ $(document).ready(() => {
     { season: '2015', comps: 83, atts: 121, yds: '884', tds: 5 },
     { season: '2016', comps: 3, atts: 4, yds: '29', tds: 1 },
   ];
+
 
   /*
   ///////////////////////////////////////////////////////////////////////////
@@ -67,6 +68,7 @@ $(document).ready(() => {
     tooltip.attr('style', `left: ${xPos}px; top: ${yPos}px`);
   }
 
+
   /* ///////////////////////////////////////////////////////////////////////////
   // DRAWING THE ARC GRAPHIC
   /////////////////////////////////////////////////////////////////////////// */
@@ -82,6 +84,7 @@ $(document).ready(() => {
     // getting the width and potential height
     const width = $(target).width();
 
+    // setting a default potential height
     const potentialHeight = width / 2;
 
     // using the lesser of potentialHeight and 400 as the height of the graphic
@@ -90,17 +93,19 @@ $(document).ready(() => {
     // the arc modifier is a factor of the height of the graphic
     let arcMod = (height / 100) * 1.5;
 
+    // if we're not drawing our overall arc graphic, we're going to adust the
+    // height and arc modifer, along with the margin object
     if (target !== '#arc-graphic') {
       height = 198;
       arcMod = (height / 100) * 1.7;
       margin.bottom = 35;
     }
 
-
     // setting our x and y scales
     const x = d3.scaleLinear().range([0, width - margin.left - margin.right]);
     const y = d3.scaleLinear().range([height, 0]);
 
+    // setting the domain
     x.domain([0, 100]);
     y.domain([height, 0]);
 
@@ -164,6 +169,7 @@ $(document).ready(() => {
     // appending the base group that will hold our baseline
     const base = svg.append('g');
 
+    // the baseline
     base.append('line')
       .attr('x1', 0)
       .attr('x2', width)
@@ -176,6 +182,7 @@ $(document).ready(() => {
       .attr('transform', `translate(${margin.left}, ${height})`)
       .call(xAxis);
 
+    // the baseline label
     svg.append('text')
       .attr('class', 'axis-label')
       .attr('text-anchor', 'middle')
@@ -184,6 +191,7 @@ $(document).ready(() => {
       .attr('class', 'axis-label')
       .text('Cowboys moving left to right');
   }
+
 
   /*
   ///////////////////////////////////////////////////////////////////////////
@@ -197,6 +205,7 @@ $(document).ready(() => {
       .interpolate(d3.interpolateHcl)
       .range([d3.rgb('#deebf7'), d3.rgb('#08306b')]);
 
+    // joining the data to the #att-graphic
     const attContainer = d3.select('#att-graphic')
       .data(data);
 
@@ -232,6 +241,7 @@ $(document).ready(() => {
       .on('mouseout', () => d3.select('#att-tooltip').attr('class', 'tooltip no-show'));
   }
 
+
   /*
   ///////////////////////////////////////////////////////////////////////////
   // CONTROLLING WHICH SEASONS GET DISPLAYED IN THE COMPLETION CHART
@@ -241,9 +251,13 @@ $(document).ready(() => {
   let selSeason = 'all';
   let selOpp = 'all';
 
+  // the function that controls which completion arcs get shown
   function viewComps() {
+    // hide all the arcs
     $('#graphic .pass').addClass('no-show');
 
+    // check if the selected season or the selected opponent is "all"
+    // then display the corresponding completion arcs based on the result
     if (selSeason !== 'all' && selOpp !== 'all') {
       $(`#graphic .yr-${selSeason}.${selOpp}`).removeClass('no-show');
     } else if (selSeason === 'all' && selOpp !== 'all') {
@@ -255,6 +269,8 @@ $(document).ready(() => {
     }
   }
 
+  // when the season or opponent dropdown is changed, grab the value and run
+  // the viewComps function to display the correct arcs
   $('#comp-season').change(() => {
     selSeason = $('#comp-season option:selected').attr('value');
     viewComps();
@@ -272,6 +288,8 @@ $(document).ready(() => {
   ///////////////////////////////////////////////////////////////////////////
   */
 
+  // when the attempts dropdown is changed, grab the selected season and hide
+  // the non matching season divs
   $('#att-season').change(() => {
     const selectedSeason = $('#att-season option:selected').attr('value');
     if (selectedSeason !== 'all') {
@@ -290,43 +308,56 @@ $(document).ready(() => {
   */
 
   function drawPassBars(receiver) {
+    // find the receiver we're looking for and assign his object to the target variable
     const target = _.find(receivers, ['receiver', receiver]);
 
+    // calculate the percentages of that receivers stats as they compare to the QBs totals
     let recPer = parseFloat(((target.catches / romoComps) * 100).toFixed(1));
     let ydsPer = parseFloat(((target.yards / romoYds) * 100).toFixed(1));
     let tdsPer = parseFloat(((target.touchdowns / romoTDs) * 100).toFixed(1));
 
+    // zero out the percentages if somehow they are below 0
     recPer = recPer > 0 ? recPer : 0;
     ydsPer = ydsPer > 0 ? ydsPer : 0;
     tdsPer = tdsPer > 0 ? tdsPer : 0;
 
+    // set the width of the player's bars equal to the corresponding stat's percentage
     $('#player-recs').css('width', `${recPer}%`);
     $('#player-yds').css('width', `${ydsPer}%`);
     $('#player-tds').css('width', `${tdsPer}%`);
 
+    // update the text for each bar with the percentage and move it to the end of the bar
     $('#rec-per').text(`${recPer}%`).css('left', `${recPer}%`);
     $('#yds-per').text(`${ydsPer}%`).css('left', `${ydsPer}%`);
     $('#tds-per').text(`${tdsPer}%`).css('left', `${tdsPer}%`);
 
+    // convert the yards total to a string so we can format it with a comma if
+    // it's 1,000 yards or more
     let ydsString = target.yards.toFixed(0);
 
+    // if the string is four characters or more, slice the string in two around where
+    // the comma should go, then combine them together again with the comma
     if (ydsString.length >= 4) {
       const yds1 = ydsString.slice(0, (ydsString.length - 3));
       const yds2 = ydsString.slice(-3);
       ydsString = `${yds1},${yds2}`;
     }
 
+    // update the actual stats with the numbers
     $('#rec-data').html(target.catches);
     $('#yds-data').html(ydsString);
     $('#tds-data').html(target.touchdowns);
 
 
+    // construct the path to the receiver's image by using his name
     let recImage = target.receiver.split(' ').join('');
     recImage = `_${recImage}.jpg`;
 
+    // update the image's source path and alt text, along with his position and years
     $('#receiver-head-block img').attr('src', `images/${recImage}`).attr('alt', target.receiver);
     $('#receiver-pos').text(`${target.pos}, ${target.years}`);
   }
+
 
   /*
   ///////////////////////////////////////////////////////////////////////////
@@ -355,6 +386,7 @@ $(document).ready(() => {
       desiredRec.push(season);
     }
 
+    // updated the receiver's name
     $('#receiver-name').text(selected);
 
     // hand off the filtered data to the arc drawing function
@@ -376,6 +408,7 @@ $(document).ready(() => {
     filterReceivers(selectedRec);
   });
 
+
   /*
   ///////////////////////////////////////////////////////////////////////////
   // CLOSING THE TOOLTIP
@@ -383,6 +416,7 @@ $(document).ready(() => {
   */
 
   $('.tooltip button').click(() => $('.tooltip').addClass('no-show'));
+
 
   /*
   ///////////////////////////////////////////////////////////////////////////
