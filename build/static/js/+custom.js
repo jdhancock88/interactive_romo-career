@@ -96,7 +96,7 @@ $(document).ready(() => {
     // if we're not drawing our overall arc graphic, we're going to adust the
     // height and arc modifer, along with the margin object
     if (target !== '#arc-graphic') {
-      height = 198;
+      height = 250;
       arcMod = (height / 100) * 1.7;
       margin.bottom = 35;
     }
@@ -230,9 +230,9 @@ $(document).ready(() => {
         if (d.result === 'incomplete' && !d.interception) {
           return 'background-color: white; border: 1px solid #d7d7d7';
         } else if (d.touchdown) {
-          return 'background-color: #fec44f';
-        } else if (d.interception) {
           return 'background-color: #e34e36';
+        } else if (d.interception) {
+          return 'background-color: #fec44f';
         }
         return `background-color: ${color(+d.yards)}`;
       })

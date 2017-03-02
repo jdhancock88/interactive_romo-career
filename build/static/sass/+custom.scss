@@ -21,10 +21,10 @@ line, path {
 path {
   fill: none;
   stroke-width: .25;
-  stroke: $black121;
+  stroke: rgb(150,150,150);
   &.touchdown {
-    stroke: $dmnblue;
-    stroke-width: .5;
+    stroke: $chartRed;
+    stroke-width: .75;
   }
 }
 
@@ -131,10 +131,10 @@ path {
       box-sizing: border-box;
     }
     &.chatter-td:before {
-      background-color: $chartYellow;
+      background-color: $chartRed;
     }
     &.chatter-int:before {
-      background-color: $chartRed;
+      background-color: $chartYellow;
     }
   }
   .chatter-yardage {
@@ -269,21 +269,24 @@ path {
     margin-bottom: 0;
   }
   p {
-    @include type(1.2rem, 1.5rem, 0);
+    @include type(1.1rem, 1.5rem, 0);
     font-weight: normal;
   }
 }
 
+.graphic-pair {
+  position: relative;
+}
+
 #receiver-bars {
-  width: 28%;
-  float: left;
-  padding-right: 2%;
-  border-right: 1px solid $black235;
+  width: 25%;
+  position: absolute;
+  padding: 10px;
+  background-color: rgba(255,255,255,.75);
 }
 .bar-group {
-  margin-bottom: 1.2rem;
-  padding-bottom: 1.2rem;
-  border-bottom: 1px solid $black235;
+  margin-bottom: .9rem;
+  padding-bottom: .9rem;
   &:last-of-type {
     margin-bottom: 0;
     padding-bottom: 0;
@@ -291,13 +294,13 @@ path {
   }
 }
 .romo-bar {
-  height: 20px;
+  height: 15px;
   display: block;
   background-color: $black235;
   position: relative;
 }
 .player-bar {
-  height: 20px;
+  height: 15px;
   @include transition(all, .25s, ease-out);
   background-color: $dmnblue;
   position: absolute;
@@ -305,7 +308,7 @@ path {
   left: 0;
 }
 .bar-label {
-  @include type(1.2rem, 1.5rem, .3rem);
+  @include type(11px, 15px, .3rem);
   font-weight: bold;
   text-transform: uppercase;
   span {
@@ -318,19 +321,19 @@ path {
 }
 .bar-data {
   position: absolute;
-  @include type(1.1rem, 20px, 0);
+  @include type(11px, 15px, 0);
   padding-left: 5px;
   font-weight: bold;
   @include transition(all, .25s, ease-out);
 }
 
 #receiver-arcs {
-  width: 70%;
-  float: right;
+  width: 100%;
   path {
-    stroke: $black50;
+    stroke: $black121;
     &.touchdown {
-      stroke: $dmnblue;
+      stroke: $chartRed;
+      stroke-weight: .75px;
     }
   }
 }
@@ -341,6 +344,7 @@ path {
     border-right: none;
     width: 100%;
     float: none;
+    position: relative;
   }
   .bar-group {
     width: 32%;

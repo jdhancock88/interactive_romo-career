@@ -843,10 +843,10 @@ line, path {
 path {
   fill: none;
   stroke-width: .25;
-  stroke: #797979; }
+  stroke: #969696; }
   path.touchdown {
-    stroke: #0185d3;
-    stroke-width: .5; }
+    stroke: #e34e36;
+    stroke-width: .75; }
 
 .axis path, .axis line {
   fill: none;
@@ -928,9 +928,9 @@ path {
       top: 0;
       box-sizing: border-box; }
     .chatter .chatter-attempt.chatter-td:before {
-      background-color: #fec44f; }
-    .chatter .chatter-attempt.chatter-int:before {
       background-color: #e34e36; }
+    .chatter .chatter-attempt.chatter-int:before {
+      background-color: #fec44f; }
   .chatter .chatter-yardage {
     width: 150px;
     display: inline-block;
@@ -1047,34 +1047,36 @@ path {
     width: calc(100% - 60px);
     margin-bottom: 0; }
   #receiver-head-block p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.5rem;
     margin-bottom: 0;
     font-weight: normal; }
 
+.graphic-pair {
+  position: relative; }
+
 #receiver-bars {
-  width: 28%;
-  float: left;
-  padding-right: 2%;
-  border-right: 1px solid #ebebeb; }
+  width: 25%;
+  position: absolute;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.75); }
 
 .bar-group {
-  margin-bottom: 1.2rem;
-  padding-bottom: 1.2rem;
-  border-bottom: 1px solid #ebebeb; }
+  margin-bottom: .9rem;
+  padding-bottom: .9rem; }
   .bar-group:last-of-type {
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: none; }
 
 .romo-bar {
-  height: 20px;
+  height: 15px;
   display: block;
   background-color: #ebebeb;
   position: relative; }
 
 .player-bar {
-  height: 20px;
+  height: 15px;
   -webkit-transtion: all 0.25s ease-out;
   -moz-transition: all 0.25s ease-out;
   -o-transition: all 0.25s ease-out;
@@ -1085,8 +1087,8 @@ path {
   left: 0; }
 
 .bar-label {
-  font-size: 1.2rem;
-  line-height: 1.5rem;
+  font-size: 11px;
+  line-height: 15px;
   margin-bottom: 0.3rem;
   font-weight: bold;
   text-transform: uppercase; }
@@ -1098,8 +1100,8 @@ path {
 
 .bar-data {
   position: absolute;
-  font-size: 1.1rem;
-  line-height: 20px;
+  font-size: 11px;
+  line-height: 15px;
   margin-bottom: 0;
   padding-left: 5px;
   font-weight: bold;
@@ -1109,19 +1111,20 @@ path {
   transition: all 0.25s ease-out; }
 
 #receiver-arcs {
-  width: 70%;
-  float: right; }
+  width: 100%; }
   #receiver-arcs path {
-    stroke: #323232; }
+    stroke: #797979; }
     #receiver-arcs path.touchdown {
-      stroke: #0185d3; }
+      stroke: #e34e36;
+      stroke-weight: .75px; }
 
 @media (max-width: 850px) {
   #receiver-bars {
     padding-right: 0;
     border-right: none;
     width: 100%;
-    float: none; }
+    float: none;
+    position: relative; }
   .bar-group {
     width: 32%;
     float: left;
