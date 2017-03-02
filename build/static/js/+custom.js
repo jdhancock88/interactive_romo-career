@@ -226,7 +226,16 @@ $(document).ready(() => {
       .data(d => d.plays)
       .enter()
       .append('span')
-      .attr('style', d => `background-color: ${color(+d.yards)}`)
+      .attr('style', (d) => {
+        if (d.result === 'incomplete' && !d.interception) {
+          return 'background-color: white; border: 1px solid #d7d7d7';
+        } else if (d.touchdown) {
+          return 'background-color: #fec44f';
+        } else if (d.interception) {
+          return 'background-color: #e34e36';
+        }
+        return `background-color: ${color(+d.yards)}`;
+      })
       .attr('class', (d) => {
         if (d.interception) {
           return 'attempt interception';
