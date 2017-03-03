@@ -263,18 +263,18 @@ $(document).ready(() => {
   // the function that controls which completion arcs get shown
   function viewComps() {
     // hide all the arcs
-    $('#graphic .pass').addClass('no-show');
+    $('#comp-graphic .pass').addClass('no-show');
 
     // check if the selected season or the selected opponent is "all"
     // then display the corresponding completion arcs based on the result
     if (selSeason !== 'all' && selOpp !== 'all') {
-      $(`#graphic .yr-${selSeason}.${selOpp}`).removeClass('no-show');
+      $(`#comp-graphic .yr-${selSeason}.${selOpp}`).removeClass('no-show');
     } else if (selSeason === 'all' && selOpp !== 'all') {
-      $(`#graphic .${selOpp}`).removeClass('no-show');
+      $(`#comp-graphic .${selOpp}`).removeClass('no-show');
     } else if (selOpp === 'all' && selSeason !== 'all') {
-      $(`#graphic .yr-${selSeason}`).removeClass('no-show');
+      $(`#comp-graphic .yr-${selSeason}`).removeClass('no-show');
     } else {
-      $('#graphic .pass').removeClass('no-show');
+      $('#comp-graphic .pass').removeClass('no-show');
     }
   }
 

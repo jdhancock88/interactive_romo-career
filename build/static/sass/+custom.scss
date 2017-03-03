@@ -188,18 +188,26 @@ path {
 // SEASON ATTEMPTS UNIT CHART
 ////////////////////////////////////////////////////////////////////////////////
 
+#att-graphic {
+  margin-top: 2.4rem;
+}
+
 .season {
   display: block;
   width: 100%;
-  margin-bottom: 1.2rem;
+  margin-bottom: 2.4rem;
+  padding-bottom: 2.4rem;
+  border-bottom: 1px solid $black245;
   position: relative;
   &:last-of-type {
     margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
   }
   .season-label {
     display: inline-block;
     font-family: $sans;
-    @include type(1.4rem, 3.6rem, 0);
+    @include type(1.4rem, 1.8rem, 1.2rem);
     width: 100%;
   }
 }
@@ -396,6 +404,14 @@ path {
   text-align: center;
   margin-bottom: -130px;
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+// CUSTOMIZING SHARE STYLES
+////////////////////////////////////////////////////////////////////////////////
+
+// modifiying the styles of our share buttons to be 25% smaller to help tighten
+// up the top in an effort to get the dataviz higher on the page
 
 .shareCommentsTop {
   margin: 2.4rem auto;
