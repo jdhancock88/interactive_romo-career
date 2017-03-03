@@ -23,7 +23,7 @@ path {
   stroke-width: .25;
   stroke: rgb(150,150,150);
   &.touchdown {
-    stroke: $chartRed;
+    stroke: $chartBlue;
     stroke-width: .75;
   }
 }
@@ -302,7 +302,7 @@ path {
 .player-bar {
   height: 15px;
   @include transition(all, .25s, ease-out);
-  background-color: $dmnblue;
+  background-color: $chartBlue;
   position: absolute;
   top: 0;
   left: 0;
@@ -332,7 +332,7 @@ path {
   path {
     stroke: $black121;
     &.touchdown {
-      stroke: $chartRed;
+      stroke: $chartBlue;
       stroke-weight: .75px;
     }
   }

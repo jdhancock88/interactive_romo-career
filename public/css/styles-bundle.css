@@ -845,7 +845,7 @@ path {
   stroke-width: .25;
   stroke: #969696; }
   path.touchdown {
-    stroke: #e34e36;
+    stroke: #329ce8;
     stroke-width: .75; }
 
 .axis path, .axis line {
@@ -1081,7 +1081,7 @@ path {
   -moz-transition: all 0.25s ease-out;
   -o-transition: all 0.25s ease-out;
   transition: all 0.25s ease-out;
-  background-color: #0185d3;
+  background-color: #329ce8;
   position: absolute;
   top: 0;
   left: 0; }
@@ -1115,7 +1115,7 @@ path {
   #receiver-arcs path {
     stroke: #797979; }
     #receiver-arcs path.touchdown {
-      stroke: #e34e36;
+      stroke: #329ce8;
       stroke-weight: .75px; }
 
 @media (max-width: 850px) {
