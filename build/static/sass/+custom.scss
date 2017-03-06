@@ -70,6 +70,7 @@ path {
   border-bottom: 1px solid $black235;
   width: 90%;
   max-width: 1000px;
+  font-family: $sans;
 
   // killing off the bottom spacing and border on the last graphic
   &.no-pad {
@@ -99,10 +100,24 @@ path {
   p {
     @include type(1.3rem, 1.8rem, .9rem);
   }
+  .chatter-key {
+    float: left;
+    margin-top: 1.2rem;
+    @media (max-width: 600px) {
+      float: none;
+    }
+  }
+  .chatter-filter {
+    float: right;
+    margin-top: 1.2rem;
+    @media (max-width: 600px) {
+      float: none;
+    }
+  }
   .control-group {
       min-width: 100px;
       float: left;
-      margin: 1.2rem 20px 1.2rem 0;
+      margin: 0rem 20px 1.2rem 0;
       max-width: 200px;
       &.att-control-group {
         float: none;
@@ -112,21 +127,22 @@ path {
         margin-right: 0;
       }
   }
-  .control-label {
+  .control-label, .chatter-label {
     font-weight: bold;
-    font-size: 1.2rem;
-    margin-right: 5px;
+    font-size: 1rem;
     text-transform: uppercase;
+  }
+  .control-label {
+    margin-right: 5px;
+  }
+  .chatter-label {
+      margin-right: 15px;
   }
   .chatter-attempt {
     padding-left: 15px;
     position: relative;
     display: inline-block;
-    margin-right: 15px;
     margin-bottom: 0;
-    text-transform: uppercase;
-    font-weight: bold;
-    @include type(12px, 10px)
     &:before {
       @include psuedoElement(10px, 10px, absolute);
       display: block;
@@ -141,6 +157,23 @@ path {
       background-color: $chartYellow;
     }
   }
+  .chatter-comp {
+    padding-left: 30px;
+    position: relative;
+    &:before {
+      @include psuedoElement(25px, 2px, absolute);
+      display: block;
+      left: 0;
+      top: 5px;
+    }
+    &.comp-arc:before {
+      background-color: rgb(150,150,150);
+    }
+    &.comp-td:before {
+      background-color: $dmnblue;
+    }
+  }
+
   .chatter-yardage {
     width: 150px;
     display: inline-block;
@@ -151,9 +184,7 @@ path {
     background: linear-gradient(to right, #deebf7 0%,#08306b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deebf7', endColorstr='#08306b',GradientType=1 ); /* IE6-9 */
     position: relative;
-    margin: 0 15px 0 0;
-    font-weight: bold;
-    font-size: 12px;
+    margin: 0 10px 0 0;
     span {
       padding-left: 2px;
     }
@@ -166,20 +197,14 @@ path {
       color: white;
     }
     &:after {
-      @include psuedoElement(11px, 15px, absolute);
+      @include psuedoElement(20px, 15px, absolute);
       content: "100";
-      right: 20px;
+      right: 2px;
       text-align: right;
       font-weight: bold;
       color: white;
       top: 0;
     }
-  }
-}
-
-#rec-graphic {
-  .chatter {
-    margin-bottom: 2.4rem;
   }
 }
 
@@ -262,6 +287,15 @@ path {
 ////////////////////////////////////////////////////////////////////////////////
 // RECEIVER CHART
 ////////////////////////////////////////////////////////////////////////////////
+
+#rec-graphic {
+  .chatter {
+    margin-bottom: 2.4rem;
+    .chatter-filter {
+      float: none;
+    }
+  }
+}
 
 // bio information for the receiver (mug, name, position, years)
 
@@ -444,9 +478,12 @@ path {
     background-position: -60px -30px;
   }
 }
+.shareComments li.printShare a {
+  background-position: -90px 0;
+  &:hover {
+    background-position: -90px -30px;
+  }
+}
 .shareComments li:nth-child(-1) {
   margin-right: 0;
-}
-.shareComments li:last-of-type {
-  display: none;
 }

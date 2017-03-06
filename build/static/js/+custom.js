@@ -189,7 +189,7 @@ $(document).ready(() => {
       .attr('x', (x(50) + margin.left))
       .attr('y', height + 35)
       .attr('class', 'axis-label')
-      .text('Cowboys moving left to right');
+      .text('Spot on the field (Cowboys moving left to right)');
   }
 
 

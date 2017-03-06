@@ -34,7 +34,8 @@ path {
   margin: 0 auto 4.8rem;
   border-bottom: 1px solid #ebebeb;
   width: 90%;
-  max-width: 1000px; }
+  max-width: 1000px;
+  font-family: "Gotham A", "Gotham B", Arial, sans-serif; }
   .graphic-block.no-pad {
     padding-bottom: 0;
     border-bottom: none;
@@ -56,32 +57,41 @@ path {
     font-size: 1.3rem;
     line-height: 1.8rem;
     margin-bottom: 0.9rem; }
+  .chatter .chatter-key {
+    float: left;
+    margin-top: 1.2rem; }
+    @media (max-width: 600px) {
+      .chatter .chatter-key {
+        float: none; } }
+  .chatter .chatter-filter {
+    float: right;
+    margin-top: 1.2rem; }
+    @media (max-width: 600px) {
+      .chatter .chatter-filter {
+        float: none; } }
   .chatter .control-group {
     min-width: 100px;
     float: left;
-    margin: 1.2rem 20px 1.2rem 0;
+    margin: 0rem 20px 1.2rem 0;
     max-width: 200px; }
     .chatter .control-group.att-control-group {
       float: none;
       display: inline-block; }
     .chatter .control-group:last-of-type {
       margin-right: 0; }
-  .chatter .control-label {
+  .chatter .control-label, .chatter .chatter-label {
     font-weight: bold;
-    font-size: 1.2rem;
-    margin-right: 5px;
+    font-size: 1rem;
     text-transform: uppercase; }
+  .chatter .control-label {
+    margin-right: 5px; }
+  .chatter .chatter-label {
+    margin-right: 15px; }
   .chatter .chatter-attempt {
     padding-left: 15px;
     position: relative;
     display: inline-block;
-    margin-right: 15px;
-    margin-bottom: 0;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 10px;
-    margin-bottom: 1.2rem; }
+    margin-bottom: 0; }
     .chatter .chatter-attempt:before {
       content: "";
       display: block;
@@ -96,6 +106,22 @@ path {
       background-color: #e34e36; }
     .chatter .chatter-attempt.chatter-int:before {
       background-color: #fec44f; }
+  .chatter .chatter-comp {
+    padding-left: 30px;
+    position: relative; }
+    .chatter .chatter-comp:before {
+      content: "";
+      display: block;
+      width: 25px;
+      height: 2px;
+      position: absolute;
+      display: block;
+      left: 0;
+      top: 5px; }
+    .chatter .chatter-comp.comp-arc:before {
+      background-color: #969696; }
+    .chatter .chatter-comp.comp-td:before {
+      background-color: #0185d3; }
   .chatter .chatter-yardage {
     width: 150px;
     display: inline-block;
@@ -111,9 +137,7 @@ path {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deebf7', endColorstr='#08306b',GradientType=1 );
     /* IE6-9 */
     position: relative;
-    margin: 0 15px 0 0;
-    font-weight: bold;
-    font-size: 12px; }
+    margin: 0 10px 0 0; }
     .chatter .chatter-yardage span {
       padding-left: 2px; }
     .chatter .chatter-yardage:before {
@@ -130,18 +154,15 @@ path {
     .chatter .chatter-yardage:after {
       content: "";
       display: block;
-      width: 11px;
+      width: 20px;
       height: 15px;
       position: absolute;
       content: "100";
-      right: 20px;
+      right: 2px;
       text-align: right;
       font-weight: bold;
       color: white;
       top: 0; }
-
-#rec-graphic .chatter {
-  margin-bottom: 2.4rem; }
 
 #att-graphic {
   margin-top: 2.4rem; }
@@ -204,6 +225,11 @@ path {
 
 .touch .tooltip button {
   display: inline-block; }
+
+#rec-graphic .chatter {
+  margin-bottom: 2.4rem; }
+  #rec-graphic .chatter .chatter-filter {
+    float: none; }
 
 #receiver-head-block {
   margin-bottom: 1.2rem; }
@@ -353,8 +379,10 @@ path {
   .shareComments li.emailShare a:hover {
     background-position: -60px -30px; }
 
+.shareComments li.printShare a {
+  background-position: -90px 0; }
+  .shareComments li.printShare a:hover {
+    background-position: -90px -30px; }
+
 .shareComments li:nth-child(-1) {
   margin-right: 0; }
-
-.shareComments li:last-of-type {
-  display: none; }
