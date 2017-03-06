@@ -136,13 +136,12 @@ path {
     margin-right: 5px;
   }
   .chatter-label {
-      margin-right: 15px;
+      margin: 0 15px 1.2rem 0;
   }
   .chatter-attempt {
     padding-left: 15px;
     position: relative;
     display: inline-block;
-    margin-bottom: 0;
     &:before {
       @include psuedoElement(10px, 10px, absolute);
       display: block;

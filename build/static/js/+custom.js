@@ -96,7 +96,7 @@ $(document).ready(() => {
     // if we're not drawing our overall arc graphic, we're going to adust the
     // height and arc modifer, along with the margin object
     if (target !== '#arc-graphic') {
-      height = 298;
+      height = potentialHeight * 0.75;
       arcMod = (height / 100) * 1.7;
       margin.bottom = 35;
     }

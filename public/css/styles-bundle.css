@@ -925,12 +925,11 @@ path {
   .chatter .control-label {
     margin-right: 5px; }
   .chatter .chatter-label {
-    margin-right: 15px; }
+    margin: 0 15px 1.2rem 0; }
   .chatter .chatter-attempt {
     padding-left: 15px;
     position: relative;
-    display: inline-block;
-    margin-bottom: 0; }
+    display: inline-block; }
     .chatter .chatter-attempt:before {
       content: "";
       display: block;
