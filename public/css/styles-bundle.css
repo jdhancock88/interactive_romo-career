@@ -1225,6 +1225,21 @@ path {
 .shareComments li:nth-child(-1) {
   margin-right: 0; }
 
+.related-content {
+  font-family: "Gotham A", "Gotham B", Arial, sans-serif;
+  width: 95%;
+  margin: 2.4rem auto;
+  max-width: 650px;
+  color: #323232;
+  padding-bottom: 2.4rem;
+  border-bottom: 1px solid #d7d7d7; }
+  .related-content h5 {
+    font-weight: bold; }
+  .related-content p {
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    margin-bottom: 0; }
+
 .interactive-footer {
   min-height: 97px;
   padding-bottom: 24px;
