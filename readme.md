@@ -1,5 +1,5 @@
 # What this is
-This is an interactive tour of Tony Romo's career, though by switching out the data and some small customization to the scrapers, you could create these data visualizations for any quarterback.
+This is an interactive tour of Tony Romo's career, though by switching out the data and some small customization to the scrapers, you could create these data visualizations for any quarterback. View the published project [here](https://interactives.dallasnews.com/2017/romo-career/).
 
 # How does it work
 In the `build > static > assets` directory there are two scrapers, the `play-scraper.py` and the `rec-formatter.py` files that pull and format the data.
